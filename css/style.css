@@ -22,7 +22,13 @@ body {
 }
 
 .buttons {
-    display: none;
+    display: default;
+}
+
+.button {
+    display: inline;
+    padding: 20px;
+    border: 1px solid black;
 }
 
 .tile {
