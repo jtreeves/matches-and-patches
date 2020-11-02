@@ -67,3 +67,17 @@
     content: '4';
     padding: 25%;
 }
+
+.token {
+    background: purple;
+}
+
+.user::before {
+    content: 'EAGLE';
+    padding: 25%;
+}
+
+.opponent::before {
+    content: 'SNAKE';
+    padding: 25%;
+}
