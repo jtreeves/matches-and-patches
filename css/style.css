@@ -24,3 +24,7 @@ body {
 .buttons {
     display: none;
 }
+
+.tile {
+    display: none;
+}
