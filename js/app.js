@@ -10,17 +10,24 @@ for (let i = 0; i < smallPatches.length; i++) {
     smallPatches[i].addEventListener('click', function(){smallPatches[i].innerText = 'clicked'})
 }
 
+
 // Grab buttons
 const play = document.querySelector('#play')
-play.addEventListener('click', dealTiles())
+play.addEventListener('click', dealTiles)
 
 // Grabs tiles
 const tiles = document.querySelectorAll('.tile')
 
+console.log(tiles)
+
 // Deals the tiles at the start of the game
 function dealTiles() {
-    tiles[0].style.display = '';
-    tiles[1].style.display = '';
-    tiles[2].style.display = '';
-    tiles[3].style.display = '';
+    console.log('inside of DealTiles')
+    tiles[0]
+    // tiles[0].removeAttribute = 'display';
+    // tiles[0].style.visibility = 'visible';
+    console.log(tiles[0])
+    tiles[1].style.visibility = 'visible';
+    tiles[2].style.visibility = 'visible';
+    tiles[3].style.visibility = 'visible';
 }
