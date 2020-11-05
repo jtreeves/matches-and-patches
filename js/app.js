@@ -1,22 +1,46 @@
 const main = document.querySelector('body')
 
+const playingCards = []
+
 const cards = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 
 document.addEventListener('DOMContentLoaded', addElement)
 function addElement() {
+    randomIndex1 = Math.floor(Math.random()*cards.length)
+    randomCard1 = cards.splice(randomIndex1, 1)
     const newDiv1 = document.createElement('div')
-    newDiv1.textContent = cards[Math.floor(Math.random()*8)]
+    playingCards.push(newDiv1)
+    newDiv1.textContent = randomCard1
     main.appendChild(newDiv1)
+
+    randomIndex2 = Math.floor(Math.random()*cards.length)
+    randomCard2 = cards.splice(randomIndex2, 1)
     const newDiv2 = document.createElement('div')
-    newDiv2.textContent = cards[Math.floor(Math.random()*8)]
+    playingCards.push(newDiv2)
+    newDiv2.textContent = randomCard2
     main.appendChild(newDiv2)
+
+    randomIndex3 = Math.floor(Math.random()*cards.length)
+    randomCard3 = cards.splice(randomIndex3, 1)
     const newDiv3 = document.createElement('div')
-    newDiv3.textContent = cards[Math.floor(Math.random()*8)]
+    playingCards.push(newDiv3)
+    newDiv3.textContent = randomCard3
     main.appendChild(newDiv3)
+
+    randomIndex4 = Math.floor(Math.random()*cards.length)
+    randomCard4 = cards.splice(randomIndex4, 1)
     const newDiv4 = document.createElement('div')
-    newDiv4.textContent = cards[Math.floor(Math.random()*8)]
+    playingCards.push(newDiv4)
+    newDiv4.textContent = randomCard4
     main.appendChild(newDiv4)
+
+    
+    return playingCards
 }
+console.log(playingCards)
+
+
+
 // // Grabs patches and handles what to do when you click them
 // const patches = document.querySelectorAll('.patch')
 // const smallPatches = document.querySelectorAll('.small-patch')
