@@ -22,7 +22,7 @@ body {
 }
 
 .buttons {
-    display: default;
+    display: none;
 }
 
 .button {
