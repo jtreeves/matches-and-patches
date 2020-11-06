@@ -9,6 +9,10 @@ body {
     justify-content: center;
 } */
 
+/* body {
+    background: white;
+} */
+
 .intro {
     display: none;
 }
@@ -31,6 +35,6 @@ body {
     border: 1px solid black;
 }
 
-.tile {
+/* .tile {
     display: none;
-}
+} */

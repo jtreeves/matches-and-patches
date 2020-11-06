@@ -1,44 +1,96 @@
 const main = document.querySelector('body')
 
-const playingCards = []
+const container = document.querySelector('.container')
+
+const smallPatches = document.querySelectorAll('.small-patch')
+
+
+
 
 const cards = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 
-document.addEventListener('DOMContentLoaded', addElement)
-function addElement() {
-    randomIndex1 = Math.floor(Math.random()*cards.length)
-    randomCard1 = cards.splice(randomIndex1, 1)
-    const newDiv1 = document.createElement('div')
-    playingCards.push(newDiv1)
-    newDiv1.textContent = randomCard1
-    main.appendChild(newDiv1)
-
-    randomIndex2 = Math.floor(Math.random()*cards.length)
-    randomCard2 = cards.splice(randomIndex2, 1)
-    const newDiv2 = document.createElement('div')
-    playingCards.push(newDiv2)
-    newDiv2.textContent = randomCard2
-    main.appendChild(newDiv2)
-
-    randomIndex3 = Math.floor(Math.random()*cards.length)
-    randomCard3 = cards.splice(randomIndex3, 1)
-    const newDiv3 = document.createElement('div')
-    playingCards.push(newDiv3)
-    newDiv3.textContent = randomCard3
-    main.appendChild(newDiv3)
-
-    randomIndex4 = Math.floor(Math.random()*cards.length)
-    randomCard4 = cards.splice(randomIndex4, 1)
-    const newDiv4 = document.createElement('div')
-    playingCards.push(newDiv4)
-    newDiv4.textContent = randomCard4
-    main.appendChild(newDiv4)
-
+function generate16Tiles(color, shapesArray) {
+    const tilesArray = [];
     
-    return playingCards
-}
-console.log(playingCards)
+    for (let i = 0; i < 4; i++) {
+        let eachShape = shapesArray[i];
 
+        for (let j = 0; j < 4; j++) {
+            const newTile = document.createElement('div');
+            newTile.classList.add('tile', color, eachShape);
+            tilesArray.push(newTile);
+        }
+    }
+    
+    tilesArray.forEach((tile, idx) => {
+        if (idx === 0 || idx === 4 || idx === 8 || idx === 12) {
+            tile.classList.add('one');
+        } else if (idx === 1 || idx === 5 || idx === 9 || idx === 13) {
+            tile.classList.add('two');
+        } else if (idx === 2 || idx === 6 || idx === 10 || idx === 14) {
+            tile.classList.add('three');
+        } else if (idx === 3 || idx === 7 || idx === 11 || idx === 15) {
+            tile.classList.add('four');
+        }
+    });
+
+    console.log(tilesArray);
+    return tilesArray;
+}
+
+const redTiles = generate16Tiles('red', ['triangle', 'square', 'circle', 'hexagon']);
+const blueTiles = generate16Tiles('blue', ['triangle', 'square', 'circle', 'hexagon']);
+const yellowTiles = generate16Tiles('yellow', ['triangle', 'square', 'circle', 'hexagon']);
+const greenTiles = generate16Tiles('green', ['triangle', 'square', 'circle', 'hexagon']);
+
+const allTiles = [...redTiles, ...blueTiles, ...yellowTiles, ...greenTiles];
+console.log(allTiles);
+
+document.addEventListener('DOMContentLoaded', iteratePatches)
+
+function dealFourCards() {
+    const playingallTiles = []
+
+    randomIndex1 = Math.floor(Math.random()*allTiles.length)
+    randomCard1 = allTiles.splice(randomIndex1, 1)[0]
+    playingallTiles.push(randomCard1)
+    console.log(randomCard1)
+    container.appendChild(randomCard1)
+
+    randomIndex2 = Math.floor(Math.random()*allTiles.length)
+    randomCard2 = allTiles.splice(randomIndex2, 1)[0]
+    playingallTiles.push(randomCard2)
+    container.appendChild(randomCard2)
+
+    randomIndex3 = Math.floor(Math.random()*allTiles.length)
+    randomCard3 = allTiles.splice(randomIndex3, 1)[0]
+    playingallTiles.push(randomCard3)
+    container.appendChild(randomCard3)
+
+    randomIndex4 = Math.floor(Math.random()*allTiles.length)
+    randomCard4 = allTiles.splice(randomIndex4, 1)[0]
+    playingallTiles.push(randomCard4)
+    container.appendChild(randomCard4)
+
+    console.log(playingallTiles[0])
+    
+    return playingallTiles
+}
+
+const fourCards = dealFourCards()
+
+function iteratePatches() {
+    for (let i = 0; i < smallPatches.length; i++) {
+        let eachPatch = smallPatches[i]
+        eachPatch.addEventListener('click', function() {
+            // const fourCards = dealFourCards()
+            
+            eachPatch.appendChild(fourCards[0])
+            console.log('trying')
+        })
+
+    }
+}
 
 
 // // Grabs patches and handles what to do when you click them
