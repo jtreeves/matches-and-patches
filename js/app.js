@@ -163,6 +163,11 @@ displayUserTiles()
 
 // Display submit button
 
+const submit = document.createElement('div')
+submit.textContent = 'Submit'
+submit.classList.add('button')
+userTiles.appendChild(submit)
+
 // Select patch on board and tile from user's tiles, then click 'submit' button, then make that tile fill that patch
 
 // AI performs similar function automatically: Choose patch at random and tile at random, and submit right after user submits
