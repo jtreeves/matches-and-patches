@@ -69,15 +69,81 @@ console.log(tiles)
 
 const tokens = ['user', 'opponent']
 
+console.log(tokens)
+
 // Choose one tile at random from the 'inactive' elements of the tiles object
 
-// Deal tile to user
+let optionalTiles = []
 
-// Repeat both steps from before, but deal to opponent
+function determineOptions() {
+    for (let i = 0; i < tiles.length; i++) {
+        if (tiles[i].status === 'inactive') {
+            optionalTiles.push(tiles[i])
+        }
+    }
+    return optionalTiles
+}
 
-// Change playing tiles' values in the tiles object to 'user' or 'opponent' based on which way it was dealt
+let choice = ''
 
-// Repeat the above steps until each side has four tiles
+function chooseTile() {
+    let choiceIndex = Math.floor(Math.random()*optionalTiles.length)
+    choice = optionalTiles[choiceIndex]
+    return choice
+}
+
+// Deal tile to user by changing the tile's status to 'user'
+
+let dealtUser = ''
+
+function dealTileToUser() {
+    dealtUser = chooseTile()
+    for (let i = 0; i < tiles.length; i++) {
+        if (tiles[i].name === dealtUser.name) {
+            tiles[i].status = 'user'
+        }
+    }
+    return dealtUser
+}
+
+// Deal tile to opponent by changing the tile's status to 'opponent'
+
+let dealtOpponent = ''
+
+function dealTileToOpponent() {
+    dealtOpponent = chooseTile()
+    for (let i = 0; i < tiles.length; i++) {
+        if (tiles[i].name === dealtOpponent.name) {
+            tiles[i].status = 'opponent'
+        }
+    }
+    return dealtOpponent
+}
+
+// Deal each side four tiles by using the above functions
+
+function openingDeal() {
+    determineOptions()
+    dealTileToUser()
+    determineOptions()
+    dealTileToOpponent()
+    determineOptions()
+    dealTileToUser()
+    determineOptions()
+    dealTileToOpponent()
+    determineOptions()
+    dealTileToUser()
+    determineOptions()
+    dealTileToOpponent()
+    determineOptions()
+    dealTileToUser()
+    determineOptions()
+    dealTileToOpponent()
+}
+
+openingDeal()
+
+console.log(tiles)
 
 // Display tiles from the tiles object with a value of 'user' at the bottom of the page
 
