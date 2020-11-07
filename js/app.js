@@ -1,5 +1,7 @@
 // Grab parts of webpage with query selectors
 
+const userTiles = document.querySelector('.user-tiles')
+
 // Create board's 64 patches with class
 
 // Store patches in an object, with keys of the patch and values of: 'inactive', <name of tile>, and 'locked'
@@ -146,6 +148,18 @@ openingDeal()
 console.log(tiles)
 
 // Display tiles from the tiles object with a value of 'user' at the bottom of the page
+
+function displayUserTiles() {
+    for (let i = 0; i < tiles.length; i++) {
+        if (tiles[i].status === 'user') {
+            let userTile = document.createElement('div')
+            userTile.classList.add('tile', tiles[i].color, tiles[i].number, tiles[i].shape)
+            userTiles.appendChild(userTile)
+        }
+    }
+}
+
+displayUserTiles()
 
 // Display submit button
 
