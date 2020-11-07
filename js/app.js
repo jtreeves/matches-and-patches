@@ -8,11 +8,66 @@
 
 // Create main game tiles with class
 
-// Store main game tiles in an object, with keys of the tile name and values of: 'inactive', 'user', 'opponent', 'user active', 'opponent active', and 'board'
+class Tile {
+    constructor(color, number, shape) {
+        this.color = color;
+        this.number = number;
+        this.shape = shape;
+        this.status = 'inactive';
+    }
+}
 
-// Create players' tokens with class
+// Store main game tiles in an array as objects, with keys including the tile name and status of the tile, which could have values of: 'inactive', 'user', 'opponent', 'user active', 'opponent active', and 'board' (but would begin as 'inactive)
+
+let tiles = []
+
+function createTiles() {
+    for (let i = 0; i < 64; i++) {
+        if (i < 16) {
+            tiles.push(new Tile('red', '', ''))
+        } else if (i < 32) {
+            tiles.push(new Tile('blue', '', ''))
+        } else if (i < 48) {
+            tiles.push(new Tile('yellow', '', ''))
+        } else {
+            tiles.push(new Tile('green', '', ''))
+        }
+    }
+    for (let i = 0; i < tiles.length; i ++) {
+        if (i % 4 === 1) {
+            tiles[i].number = 'one'
+        } else if (i % 4 === 2) {
+            tiles[i].number = 'two'
+        } else if (i % 4 === 3) {
+            tiles[i].number = 'three'
+        } else {
+            tiles[i].number = 'four'
+        }
+    }
+    for (let i = 0; i < tiles.length; i++) {
+        if ((i >= 0 && i<= 3) || (i >= 16 && i<= 19) || (i >= 32 && i<= 35) || (i >= 48 && i <= 51)) {
+            tiles[i].shape = 'triangle'
+        } else if ((i >= 4 && i<= 7) || (i >= 20 && i<= 23) || (i >= 36 && i<= 39) || (i >= 52 && i <= 55)) {
+            tiles[i].shape = 'square'
+        } else if ((i >= 8 && i<= 11) || (i >= 24 && i<= 27) || (i >= 40 && i<= 43) || (i >= 56 && i <= 59)) {
+            tiles[i].shape = 'hexagon'
+        } else {
+            tiles[i].shape = 'circle'
+        }
+    }
+    for (let i = 0; i < tiles.length; i++) {
+        tiles[i].name = `${tiles[i].color} ${tiles[i].number} ${tiles[i].shape}`
+    }
+    return tiles
+}
+
+createTiles()
+
+console.log(tiles)
 
 // Store players' tokens in an array
+
+const tokens = ['user', 'opponent']
 
 // Choose one tile at random from the 'inactive' elements of the tiles object
 
@@ -66,99 +121,99 @@
 
 // OLD CODE
 
-const main = document.querySelector('body')
+// const main = document.querySelector('body')
 
-const container = document.querySelector('.container')
+// const container = document.querySelector('.container')
 
-const smallPatches = document.querySelectorAll('.small-patch')
-
-
+// const smallPatches = document.querySelectorAll('.small-patch')
 
 
-const cards = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 
-function generate16Tiles(color, shapesArray) {
-    const tilesArray = [];
+
+// const cards = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+
+// function generate16Tiles(color, shapesArray) {
+//     const tilesArray = [];
     
-    for (let i = 0; i < 4; i++) {
-        let eachShape = shapesArray[i];
+//     for (let i = 0; i < 4; i++) {
+//         let eachShape = shapesArray[i];
 
-        for (let j = 0; j < 4; j++) {
-            const newTile = document.createElement('div');
-            newTile.classList.add('tile', color, eachShape);
-            tilesArray.push(newTile);
-        }
-    }
+//         for (let j = 0; j < 4; j++) {
+//             const newTile = document.createElement('div');
+//             newTile.classList.add('tile', color, eachShape);
+//             tilesArray.push(newTile);
+//         }
+//     }
     
-    tilesArray.forEach((tile, idx) => {
-        if (idx === 0 || idx === 4 || idx === 8 || idx === 12) {
-            tile.classList.add('one');
-        } else if (idx === 1 || idx === 5 || idx === 9 || idx === 13) {
-            tile.classList.add('two');
-        } else if (idx === 2 || idx === 6 || idx === 10 || idx === 14) {
-            tile.classList.add('three');
-        } else if (idx === 3 || idx === 7 || idx === 11 || idx === 15) {
-            tile.classList.add('four');
-        }
-    });
+//     tilesArray.forEach((tile, idx) => {
+//         if (idx === 0 || idx === 4 || idx === 8 || idx === 12) {
+//             tile.classList.add('one');
+//         } else if (idx === 1 || idx === 5 || idx === 9 || idx === 13) {
+//             tile.classList.add('two');
+//         } else if (idx === 2 || idx === 6 || idx === 10 || idx === 14) {
+//             tile.classList.add('three');
+//         } else if (idx === 3 || idx === 7 || idx === 11 || idx === 15) {
+//             tile.classList.add('four');
+//         }
+//     });
 
-    console.log(tilesArray);
-    return tilesArray;
-}
+//     console.log(tilesArray);
+//     return tilesArray;
+// }
 
-const redTiles = generate16Tiles('red', ['triangle', 'square', 'circle', 'hexagon']);
-const blueTiles = generate16Tiles('blue', ['triangle', 'square', 'circle', 'hexagon']);
-const yellowTiles = generate16Tiles('yellow', ['triangle', 'square', 'circle', 'hexagon']);
-const greenTiles = generate16Tiles('green', ['triangle', 'square', 'circle', 'hexagon']);
+// const redTiles = generate16Tiles('red', ['triangle', 'square', 'circle', 'hexagon']);
+// const blueTiles = generate16Tiles('blue', ['triangle', 'square', 'circle', 'hexagon']);
+// const yellowTiles = generate16Tiles('yellow', ['triangle', 'square', 'circle', 'hexagon']);
+// const greenTiles = generate16Tiles('green', ['triangle', 'square', 'circle', 'hexagon']);
 
-const allTiles = [...redTiles, ...blueTiles, ...yellowTiles, ...greenTiles];
-console.log(allTiles);
+// const allTiles = [...redTiles, ...blueTiles, ...yellowTiles, ...greenTiles];
+// console.log(allTiles);
 
-document.addEventListener('DOMContentLoaded', iteratePatches)
+// document.addEventListener('DOMContentLoaded', iteratePatches)
 
-function dealFourCards() {
-    const playingallTiles = []
+// function dealFourCards() {
+//     const playingallTiles = []
 
-    randomIndex1 = Math.floor(Math.random()*allTiles.length)
-    randomCard1 = allTiles.splice(randomIndex1, 1)[0]
-    playingallTiles.push(randomCard1)
-    console.log(randomCard1)
-    container.appendChild(randomCard1)
+//     randomIndex1 = Math.floor(Math.random()*allTiles.length)
+//     randomCard1 = allTiles.splice(randomIndex1, 1)[0]
+//     playingallTiles.push(randomCard1)
+//     console.log(randomCard1)
+//     container.appendChild(randomCard1)
 
-    randomIndex2 = Math.floor(Math.random()*allTiles.length)
-    randomCard2 = allTiles.splice(randomIndex2, 1)[0]
-    playingallTiles.push(randomCard2)
-    container.appendChild(randomCard2)
+//     randomIndex2 = Math.floor(Math.random()*allTiles.length)
+//     randomCard2 = allTiles.splice(randomIndex2, 1)[0]
+//     playingallTiles.push(randomCard2)
+//     container.appendChild(randomCard2)
 
-    randomIndex3 = Math.floor(Math.random()*allTiles.length)
-    randomCard3 = allTiles.splice(randomIndex3, 1)[0]
-    playingallTiles.push(randomCard3)
-    container.appendChild(randomCard3)
+//     randomIndex3 = Math.floor(Math.random()*allTiles.length)
+//     randomCard3 = allTiles.splice(randomIndex3, 1)[0]
+//     playingallTiles.push(randomCard3)
+//     container.appendChild(randomCard3)
 
-    randomIndex4 = Math.floor(Math.random()*allTiles.length)
-    randomCard4 = allTiles.splice(randomIndex4, 1)[0]
-    playingallTiles.push(randomCard4)
-    container.appendChild(randomCard4)
+//     randomIndex4 = Math.floor(Math.random()*allTiles.length)
+//     randomCard4 = allTiles.splice(randomIndex4, 1)[0]
+//     playingallTiles.push(randomCard4)
+//     container.appendChild(randomCard4)
 
-    console.log(playingallTiles[0])
+//     console.log(playingallTiles[0])
     
-    return playingallTiles
-}
+//     return playingallTiles
+// }
 
-const fourCards = dealFourCards()
+// const fourCards = dealFourCards()
 
-function iteratePatches() {
-    for (let i = 0; i < smallPatches.length; i++) {
-        let eachPatch = smallPatches[i]
-        eachPatch.addEventListener('click', function() {
-            // const fourCards = dealFourCards()
+// function iteratePatches() {
+//     for (let i = 0; i < smallPatches.length; i++) {
+//         let eachPatch = smallPatches[i]
+//         eachPatch.addEventListener('click', function() {
+//             // const fourCards = dealFourCards()
             
-            eachPatch.appendChild(fourCards[0])
-            console.log('trying')
-        })
+//             eachPatch.appendChild(fourCards[0])
+//             console.log('trying')
+//         })
 
-    }
-}
+//     }
+// }
 
 
 // // Grabs patches and handles what to do when you click them
