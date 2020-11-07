@@ -1,3 +1,71 @@
+// Grab parts of webpage with query selectors
+
+// Create board's 64 patches with class
+
+// Store patches in an object, with keys of the patch and values of: 'inactive', <name of tile>, and 'locked'
+
+// Display 16-patch board, with CSS and object's first 16 instances
+
+// Create main game tiles with class
+
+// Store main game tiles in an object, with keys of the tile name and values of: 'inactive', 'user', 'opponent', 'user active', 'opponent active', and 'board'
+
+// Create players' tokens with class
+
+// Store players' tokens in an array
+
+// Choose one tile at random from the 'inactive' elements of the tiles object
+
+// Deal tile to user
+
+// Repeat both steps from before, but deal to opponent
+
+// Change playing tiles' values in the tiles object to 'user' or 'opponent' based on which way it was dealt
+
+// Repeat the above steps until each side has four tiles
+
+// Display tiles from the tiles object with a value of 'user' at the bottom of the page
+
+// Display submit button
+
+// Select patch on board and tile from user's tiles, then click 'submit' button, then make that tile fill that patch
+
+// AI performs similar function automatically: Choose patch at random and tile at random, and submit right after user submits
+
+// Check for errors that would result in an unacceptable move: First move must be on a certain patch, subsequent moves must be on touching patches, and moves must be on 'inactive' patches
+
+// Check for conflicts that would result in an uncompleted move: If user and AI choose same patch, then the patch goes to the player whose side includes that patch; player must still use selected tile, but choose a different patch
+
+// Change newly played patches on the board to have values of <name of tile> in the patches object
+
+// Change newly played tiles on the board to have values of 'user active' or 'opponent active', based on who played what, in the tiles object
+
+// Evaluate all possible match pairs for each player at the end of each round by looking at patches not marked with 'inactive' or 'locked' in patches object that are near patches occupied by <name of tile>, where that tile is marked as 'user active' or 'opponent active' in the tiles object
+
+// Check for conflicts that would result in match pair disputes: If each player is attempting to match with the same tile, tally the points going along with each match pair, and award the tile to the winner
+
+// Replace match pairs with player tokens on the patches; this changes display with the element from the array and the patch's value in the patches object to 'locked'
+
+// Change tile's value in tile object to 'board'
+
+// Deal new tile to each player at end of each round; involves changing the tile's value in the tile object
+
+// Create tally for each player that tallies their tokens on the board
+
+// Update tally after each round by incrementing by however many pieces were captured
+
+// Determine end of game: Less than two empty patches on the board
+
+// Evaluate winner: Whichever player has the highest tally
+
+// Display winner
+
+// Restart game by clearing board, and setting all patches' values to 'inactive' in patches object and all tiles' values as 'inactive' in tiles object
+
+
+
+// OLD CODE
+
 const main = document.querySelector('body')
 
 const container = document.querySelector('.container')
