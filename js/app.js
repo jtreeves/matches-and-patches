@@ -287,13 +287,17 @@ function selectPatch() {
     return activePatch
 }
 
+let userChoicePatch = activePatch[0]
+let userChoiceTile = activeTile[0]
+
 function changeBoard() {
     selectTile()
     selectPatch()
-    activePatch[0].append(activeTile[0])
+    userChoicePatch.append(userChoiceTile)
+    opponentMove()
 }
 
-changeBoard()
+// changeBoard()
 
 // function linkPatches() {
 //     for (let i = 0; i < smallPatches.length; i++) {
@@ -308,6 +312,60 @@ changeBoard()
 // console.log(smallPatchesElements)
 
 // AI performs similar function automatically: Choose patch at random and tile at random, and submit right after user submits
+
+let opponentTileOptions = []
+
+function opponentTiles() {
+    for (let i = 0; i < tiles.length; i++) {
+        if (tiles[i].status === 'opponent') {
+            opponentTileOptions.push(tiles[i])
+        }
+    }
+    return opponentTileOptions
+}
+
+// opponentTiles()
+
+// console.log(opponentTileOptions)
+
+let randomTile = ''
+
+function chooseRandomTile() {
+    opponentTiles()
+    randomTile = opponentTileOptions[Math.floor(Math.random()*opponentTileOptions.length)]
+    return randomTile
+}
+
+// chooseRandomTile()
+
+// console.log(randomTile)
+
+let randomPatch = ''
+
+function chooseRandomPatch() {
+    randomPatch = smallPatchesElements[Math.floor(Math.random()*16)]
+    return randomPatch
+}
+
+// chooseRandomPatch()
+
+// console.log(randomPatch)
+
+function opponentMove() {
+    chooseRandomTile()
+    chooseRandomPatch()
+    let opponentTile = document.createElement('div')
+    opponentTile.classList.add('tile', randomTile.color, randomTile.number, randomTile.shape)
+    randomPatch.append(opponentTile)
+}
+
+// opponentMove()
+
+// const opponent = document.createElement('div')
+// opponent.textContent = 'Opponent'
+// opponent.classList.add('button')
+// userTiles.appendChild(opponent)
+// opponent.addEventListener('click', opponentMove)
 
 // Check for errors that would result in an unacceptable move: First move must be on a certain patch, subsequent moves must be on touching patches, and moves must be on 'inactive' patches
 
