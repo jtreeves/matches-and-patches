@@ -14,7 +14,7 @@ class Patch {
     }
 }
 
-// Store patches as objects in an array, with keys of the patch and values of: 'inactive', <name of tile>, and 'locked'
+// Store patches as objects in an array, with keys of the patch and values of: 'inactive', 'user active', 'opponent active', <name of tile>, and 'locked'
 
 let patches = []
 
@@ -252,6 +252,60 @@ submit.classList.add('button')
 userTiles.appendChild(submit)
 
 // Select patch on board and tile from user's tiles, then click 'submit' button, then make that tile fill that patch
+
+submit.addEventListener('click', changeBoard)
+
+const tileElements = document.querySelectorAll('.tile')
+
+console.log(tileElements)
+
+let activeTile = []
+
+function selectTile() {
+    for (let i = 0; i < tileElements.length; i++) {
+        tileElements[i].addEventListener('click', function() {
+            activeTile.push(tileElements[i])
+            console.log(activeTile[0])
+        })
+    }
+    return activeTile
+}
+
+const smallPatchesElements = document.querySelectorAll('.small-patch')
+
+console.log(smallPatchesElements)
+
+let activePatch = []
+
+function selectPatch() {
+    for (let i = 0; i < smallPatchesElements.length; i++) {
+        smallPatchesElements[i].addEventListener('click', function() {
+            activePatch.push(smallPatchesElements[i])
+            console.log(activePatch[0])
+        })
+    }
+    return activePatch
+}
+
+function changeBoard() {
+    selectTile()
+    selectPatch()
+    activePatch[0].append(activeTile[0])
+}
+
+changeBoard()
+
+// function linkPatches() {
+//     for (let i = 0; i < smallPatches.length; i++) {
+//         smallPatches[i].element = smallPatchesElements[i]
+//     }
+//     return smallPatches
+// }
+
+// linkPatches()
+
+// console.log(smallPatches)
+// console.log(smallPatchesElements)
 
 // AI performs similar function automatically: Choose patch at random and tile at random, and submit right after user submits
 
