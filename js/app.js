@@ -4,6 +4,8 @@ const smallBoard = document.querySelector('.small-board')
 
 const userTiles = document.querySelector('.user-tiles')
 
+const opponentTiles = document.querySelector('.opponent-tiles')
+
 // Create board's 64 patches with class
 
 class Patch {
@@ -244,6 +246,18 @@ function displayUserTiles() {
 
 displayUserTiles()
 
+function displayOpponentTiles() {
+    for (let i = 0; i < tiles.length; i++) {
+        if (tiles[i].status === 'opponent') {
+            let opponentTile = document.createElement('div')
+            opponentTile.classList.add('tile', tiles[i].color, tiles[i].number, tiles[i].shape)
+            opponentTiles.appendChild(opponentTile)
+        }
+    }
+}
+
+displayOpponentTiles()
+
 // Display submit button
 
 const submit = document.createElement('div')
@@ -255,44 +269,82 @@ userTiles.appendChild(submit)
 
 submit.addEventListener('click', changeBoard)
 
-const tileElements = document.querySelectorAll('.tile')
+// const tileElements = document.querySelectorAll('.tile')
 
-console.log(tileElements)
+// console.log(tileElements)
 
-let activeTile = []
+// let activeTile = []
 
-function selectTile() {
-    for (let i = 0; i < tileElements.length; i++) {
-        tileElements[i].addEventListener('click', function() {
-            activeTile.push(tileElements[i])
-            console.log(activeTile[0])
-        })
-    }
-    return activeTile
-}
+// function selectTile() {
+//     for (let i = 0; i < tiles.length; i++) {
+//         if (tiles[i].status === 'user') {
+//             let tileElements = document.querySelectorAll('tile')
+//             for (let j = 0; j < tileElements.length; j++) {
+//                 tileElements[j].addEventListener('click', function() {
+//                     console.log('trying')
+//                 })
+//             }
+//         }
+//     }
+//     // return activeTile
+// }
 
-const smallPatchesElements = document.querySelectorAll('.small-patch')
+// selectTile()
 
-console.log(smallPatchesElements)
+// document.addEventListener('click', function(event) {
+//     console.log(event.target.classList.value)
+// })
 
-let activePatch = []
+// let selectedTile = ''
 
-function selectPatch() {
-    for (let i = 0; i < smallPatchesElements.length; i++) {
-        smallPatchesElements[i].addEventListener('click', function() {
-            activePatch.push(smallPatchesElements[i])
-            console.log(activePatch[0])
-        })
-    }
-    return activePatch
-}
+// document.addEventListener('click', function(event) {
+//     selectedTile = event.target.classList.value
+//     console.log(selectedTile)
+//     return selectedTile
+// })
 
-let userChoicePatch = activePatch[0]
-let userChoiceTile = activeTile[0]
+// console.log(selectedTile)
+
+document.addEventListener('click', function(event1) {
+    let selectedTile = event1.target.classList.value
+    document.addEventListener('click', function(event2) {
+        let selectedPatch = event2.target.classList.value
+        selectedPatch.appendChild(selectedTile)
+    })
+})
+
+// $(tiles[i]).click(function(){console.log('clicked')})
+
+// function selectTile() {
+//     for (let i = 0; i < tiles.length; i++) {
+//         if (tiles[i] === 'user') {
+//             $(tiles[i]).click(function(){console.log('clicked')})
+//         }
+//     }
+// }
+
+// selectTile()
+
+// const smallPatchesElements = document.querySelectorAll('.small-patch')
+
+// console.log(smallPatchesElements)
+
+// let activePatch = []
+
+// function selectPatch() {
+//     for (let i = 0; i < smallPatchesElements.length; i++) {
+//         smallPatchesElements[i].addEventListener('click', function() {
+//             activePatch.push(smallPatchesElements[i])
+//             console.log(activePatch[0])
+//         })
+//     }
+//     return activePatch
+// }
+
 
 function changeBoard() {
-    selectTile()
-    selectPatch()
+    let userChoicePatch = selectPatch()[0]
+    let userChoiceTile = selectTile()[0]
     userChoicePatch.append(userChoiceTile)
     opponentMove()
 }
@@ -313,53 +365,53 @@ function changeBoard() {
 
 // AI performs similar function automatically: Choose patch at random and tile at random, and submit right after user submits
 
-let opponentTileOptions = []
+// let opponentTileOptions = []
 
-function opponentTiles() {
-    for (let i = 0; i < tiles.length; i++) {
-        if (tiles[i].status === 'opponent') {
-            opponentTileOptions.push(tiles[i])
-        }
-    }
-    return opponentTileOptions
-}
+// function opponentTiles() {
+//     for (let i = 0; i < tiles.length; i++) {
+//         if (tiles[i].status === 'opponent') {
+//             opponentTileOptions.push(tiles[i])
+//         }
+//     }
+//     return opponentTileOptions
+// }
 
-// opponentTiles()
+// // opponentTiles()
 
-// console.log(opponentTileOptions)
+// // console.log(opponentTileOptions)
 
-let randomTile = ''
+// let randomTile = ''
 
-function chooseRandomTile() {
-    opponentTiles()
-    randomTile = opponentTileOptions[Math.floor(Math.random()*opponentTileOptions.length)]
-    return randomTile
-}
+// function chooseRandomTile() {
+//     opponentTiles()
+//     randomTile = opponentTileOptions[Math.floor(Math.random()*opponentTileOptions.length)]
+//     return randomTile
+// }
 
-// chooseRandomTile()
+// // chooseRandomTile()
 
-// console.log(randomTile)
+// // console.log(randomTile)
 
-let randomPatch = ''
+// let randomPatch = ''
 
-function chooseRandomPatch() {
-    randomPatch = smallPatchesElements[Math.floor(Math.random()*16)]
-    return randomPatch
-}
+// function chooseRandomPatch() {
+//     randomPatch = smallPatchesElements[Math.floor(Math.random()*16)]
+//     return randomPatch
+// }
 
-// chooseRandomPatch()
+// // chooseRandomPatch()
 
-// console.log(randomPatch)
+// // console.log(randomPatch)
 
-function opponentMove() {
-    chooseRandomTile()
-    chooseRandomPatch()
-    let opponentTile = document.createElement('div')
-    opponentTile.classList.add('tile', randomTile.color, randomTile.number, randomTile.shape)
-    randomPatch.append(opponentTile)
-}
+// function opponentMove() {
+//     chooseRandomTile()
+//     chooseRandomPatch()
+//     let opponentTile = document.createElement('div')
+//     opponentTile.classList.add('tile', randomTile.color, randomTile.number, randomTile.shape)
+//     randomPatch.append(opponentTile)
+// }
 
-// opponentMove()
+// // opponentMove()
 
 // const opponent = document.createElement('div')
 // opponent.textContent = 'Opponent'
