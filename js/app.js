@@ -1,12 +1,95 @@
 // Grab parts of webpage with query selectors
 
+const smallBoard = document.querySelector('.small-board')
+
 const userTiles = document.querySelector('.user-tiles')
 
 // Create board's 64 patches with class
 
-// Store patches in an object, with keys of the patch and values of: 'inactive', <name of tile>, and 'locked'
+class Patch {
+    constructor(row, column) {
+        this.row = row;
+        this.column = column;
+        this.status = 'inactive';
+    }
+}
+
+// Store patches as objects in an array, with keys of the patch and values of: 'inactive', <name of tile>, and 'locked'
+
+let patches = []
+
+function createPatches() {
+    for (let i = 0; i < 64; i++) {
+        if (i < 8) {
+            patches.push(new Patch(1, ''))
+        } else if (i < 16) {
+            patches.push(new Patch(2, ''))
+        } else if (i < 24) {
+            patches.push(new Patch(3, ''))
+        } else if (i < 32) {
+            patches.push(new Patch(4, ''))
+        } else if (i < 40) {
+            patches.push(new Patch(5, ''))
+        } else if (i < 48) {
+            patches.push(new Patch(6, ''))
+        } else if (i < 56) {
+            patches.push(new Patch(7, ''))
+        } else {
+            patches.push(new Patch(8, ''))
+        }
+    }
+    for (let i = 0; i < patches.length; i++) {
+        if ((i + 1) % 8 === 1) {
+            patches[i].column = 1
+        } else if ((i + 1) % 8 === 2) {
+            patches[i].column = 2
+        } else if ((i + 1) % 8 === 3) {
+            patches[i].column = 3
+        } else if ((i + 1) % 8 === 4) {
+            patches[i].column = 4
+        } else if ((i + 1) % 8 === 5) {
+            patches[i].column = 5
+        } else if ((i + 1) % 8 === 6) {
+            patches[i].column = 6
+        } else if ((i + 1) % 8 === 7) {
+            patches[i].column = 7
+        } else {
+            patches[i].column = 8
+        }
+    }
+    return patches
+}
+
+createPatches()
+
+console.log(patches)
 
 // Display 16-patch board, with CSS and object's first 16 instances
+
+let smallPatches = []
+
+function createSmallPatches() {
+    for (let i = 0; i < patches.length; i++) {
+        if (patches[i].row <= 4 && patches[i].column <= 4) {
+            smallPatches.push(patches[i])
+        }
+    }
+    return smallPatches
+}
+
+createSmallPatches()
+
+console.log(smallPatches)
+
+function displaySmallBoard() {
+    for (let i = 0; i < smallPatches.length; i++) {
+        let smallPatch = document.createElement('div')
+        smallPatch.classList.add('small-patch')
+        smallBoard.appendChild(smallPatch)
+    }
+}
+
+displaySmallBoard()
 
 // Create main game tiles with class
 
@@ -36,11 +119,11 @@ function createTiles() {
         }
     }
     for (let i = 0; i < tiles.length; i ++) {
-        if (i % 4 === 1) {
+        if ((i + 1) % 4 === 1) {
             tiles[i].number = 'one'
-        } else if (i % 4 === 2) {
+        } else if ((i + 1) % 4 === 2) {
             tiles[i].number = 'two'
-        } else if (i % 4 === 3) {
+        } else if ((i + 1) % 4 === 3) {
             tiles[i].number = 'three'
         } else {
             tiles[i].number = 'four'
