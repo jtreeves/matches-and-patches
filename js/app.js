@@ -512,14 +512,14 @@ function checkOpponentPairs() {
 function tokenUpgrade() {
     for (let i = 0; i < patches.length; i++) {
         if (patches[i].status === 'user captured') {
-            // while (userPatch.div.firstChild) {
-            //     userPatch.div.removeChild(userPatch.div.firstChild)
-            // }
+            while (userPatch.div.firstChild) {
+                userPatch.div.removeChild(userPatch.div.firstChild)
+            }
             userPatch.div.append(userToken)
         } else if (patches[i].status === 'opponent captured') {
-            // while (opponentPatch.div.firstChild) {
-            //     opponentPatch.div.removeChild(opponentPatch.div.firstChild)
-            // }
+            while (opponentPatch.div.firstChild) {
+                opponentPatch.div.removeChild(opponentPatch.div.firstChild)
+            }
             opponentPatch.div.append(opponentToken)
         }
     }
