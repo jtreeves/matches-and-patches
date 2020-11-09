@@ -402,13 +402,13 @@ function checkUserPairs() {
     let userRightPatch = ''
     for (let i = 0; i < patches.length; i++) {
         if (patches[i].row === userTopPatchRow && patches[i].column === userColumn) {
-            userTopPatch = patches[i].status
+            userTopPatch = patches[i]
         } else if (patches[i].row === userBottomPatchRow && patches[i].column === userColumn) {
-            userBottomPatch = patches[i].status
+            userBottomPatch = patches[i]
         } else if (patches[i].row === userRow && patches[i].column === userLeftPatchColumn) {
-            userLeftPatch = patches[i].status
+            userLeftPatch = patches[i]
         } else if (patches[i].row === userRow && patches[i].column === userRightPatchColumn) {
-            userRightPatch = patches[i].status
+            userRightPatch = patches[i]
         }
     }
     let userTopTile = ''
@@ -416,31 +416,31 @@ function checkUserPairs() {
     let userLeftTile = ''
     let userRightTile = ''
     for (let i = 0; i < tiles.length; i++) {
-        if (tiles[i].name === userTopPatch) {
+        if (tiles[i].name === userTopPatch.status) {
             userTopTile = tiles[i]
-        } else if (tiles[i].name === userBottomPatch) {
+        } else if (tiles[i].name === userBottomPatch.status) {
             userBottomTile = tiles[i]
-        } else if (tiles[i].name === userLeftPatch) {
+        } else if (tiles[i].name === userLeftPatch.status) {
             userLeftTile = tiles[i]
-        } else if (tiles[i].name === userRightPatch) {
+        } else if (tiles[i].name === userRightPatch.status) {
             userRightTile = tiles[i]
         }
     }
     if (userTile.color === userTopTile.color || userTile.number === userTopTile.number || userTile.shape === userTopTile.shape) {
         userPatch.status = 'user captured'
-        userTopPatch = 'user captured'
+        userTopPatch.status = 'user captured'
         console.log('USER MATCHED WITH TOP')
     } else if (userTile.color === userBottomTile.color || userTile.number === userBottomTile.number || userTile.shape === userBottomTile.shape) {
         userPatch.status = 'user captured'
-        userBottomPatch = 'user captured'
+        userBottomPatch.status = 'user captured'
         console.log('USER MATCHED WITH BOTTOM')
     } else if (userTile.color === userLeftTile.color || userTile.number === userLeftTile.number || userTile.shape === userLeftTile.shape) {
         userPatch.status = 'user captured'
-        userLeftPatch = 'user captured'
+        userLeftPatch.status = 'user captured'
         console.log('USER MATCHED WITH LEFT')
     } else if (userTile.color === userRightTile.color || userTile.number === userRightTile.number || userTile.shape === userRightTile.shape) {
         userPatch.status = 'user captured'
-        userRightPatch = 'user captured'
+        userRightPatch.status = 'user captured'
         console.log('USER MATCHED WITH RIGHT')
     } else {
         console.log('NO MATCH FOR USER')
@@ -460,13 +460,13 @@ function checkOpponentPairs() {
     let opponentRightPatch = ''
     for (let i = 0; i < patches.length; i++) {
         if (patches[i].row === opponentTopPatchRow && patches[i].column === opponentColumn) {
-            opponentTopPatch = patches[i].status
+            opponentTopPatch = patches[i]
         } else if (patches[i].row === opponentBottomPatchRow && patches[i].column === opponentColumn) {
-            opponentBottomPatch = patches[i].status
+            opponentBottomPatch = patches[i]
         } else if (patches[i].row === opponentRow && patches[i].column === opponentLeftPatchColumn) {
-            opponentLeftPatch = patches[i].status
+            opponentLeftPatch = patches[i]
         } else if (patches[i].row === opponentRow && patches[i].column === opponentRightPatchColumn) {
-            opponentRightPatch = patches[i].status
+            opponentRightPatch = patches[i]
         }
     }
     let opponentTopTile = ''
@@ -474,31 +474,31 @@ function checkOpponentPairs() {
     let opponentLeftTile = ''
     let opponentRightTile = ''
     for (let i = 0; i < tiles.length; i++) {
-        if (tiles[i].name === opponentTopPatch) {
+        if (tiles[i].name === opponentTopPatch.status) {
             opponentTopTile = tiles[i]
-        } else if (tiles[i].name === opponentBottomPatch) {
+        } else if (tiles[i].name === opponentBottomPatch.status) {
             opponentBottomTile = tiles[i]
-        } else if (tiles[i].name === opponentLeftPatch) {
+        } else if (tiles[i].name === opponentLeftPatch.status) {
             opponentLeftTile = tiles[i]
-        } else if (tiles[i].name === opponentRightPatch) {
+        } else if (tiles[i].name === opponentRightPatch.status) {
             opponentRightTile = tiles[i]
         }
     }
     if (opponentTile.color === opponentTopTile.color || opponentTile.number === opponentTopTile.number || opponentTile.shape === opponentTopTile.shape) {
         opponentPatch.status = 'opponent captured'
-        opponentTopPatch = 'opponent captured'
+        opponentTopPatch.status = 'opponent captured'
         console.log('OPPONENT MATCHED WITH TOP')
     } else if (opponentTile.color === opponentBottomTile.color || opponentTile.number === opponentBottomTile.number || opponentTile.shape === opponentBottomTile.shape) {
         opponentPatch.status = 'opponent captured'
-        opponentBottomPatch = 'opponent captured'
+        opponentBottomPatch.status = 'opponent captured'
         console.log('OPPONENT MATCHED WITH BOTTOM')
     } else if (opponentTile.color === opponentLeftTile.color || opponentTile.number === opponentLeftTile.number || opponentTile.shape === opponentLeftTile.shape) {
         opponentPatch.status = 'opponent captured'
-        opponentLeftPatch = 'opponent captured'
+        opponentLeftPatch.status = 'opponent captured'
         console.log('OPPONENT MATCHED WITH LEFT')
     } else if (opponentTile.color === opponentRightTile.color || opponentTile.number === opponentRightTile.number || opponentTile.shape === opponentRightTile.shape) {
         opponentPatch.status = 'opponent captured'
-        opponentRightPatch = 'opponent captured'
+        opponentRightPatch.status = 'opponent captured'
         console.log('OPPONENT MATCHED WITH RIGHT')
     } else {
         console.log('NO MATCH FOR OPPONENT')
