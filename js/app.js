@@ -207,6 +207,7 @@ function chooseTile() {
 function dealTileToUser() {
     chooseTile()
     choice.status = 'user'
+    userTiles.append(choice.div)
 }
 
 // let dealtUser = ''
@@ -226,6 +227,7 @@ function dealTileToUser() {
 function dealTileToOpponent() {
     chooseTile()
     choice.status = 'opponent'
+    opponentTiles.append(choice.div)
 }
 
 // let dealtOpponent = ''
@@ -267,25 +269,25 @@ console.log(tiles)
 
 // Display tiles from the tiles object with a value of 'user' at the bottom of the page
 
-function displayUserTiles(array) {
-    for (let i = 0; i < array.length; i++) {
-        if (array[i].status === 'user') {
-            userTiles.appendChild(array[i].div)
-        }
-    }
-}
+// function displayUserTiles(array) {
+//     for (let i = 0; i < array.length; i++) {
+//         if (array[i].status === 'user') {
+//             userTiles.appendChild(array[i].div)
+//         }
+//     }
+// }
 
-displayUserTiles(tiles)
+// displayUserTiles(tiles)
 
-function displayOpponentTiles(array) {
-    for (let i = 0; i < array.length; i++) {
-        if (array[i].status === 'opponent') {
-            opponentTiles.appendChild(array[i].div)
-        }
-    }
-}
+// function displayOpponentTiles(array) {
+//     for (let i = 0; i < array.length; i++) {
+//         if (array[i].status === 'opponent') {
+//             opponentTiles.appendChild(array[i].div)
+//         }
+//     }
+// }
 
-displayOpponentTiles(tiles)
+// displayOpponentTiles(tiles)
 
 // Display submit button
 
@@ -381,6 +383,7 @@ function setUserMove() {
     userTile.status = 'board'
     setOpponentMove()
     changeBoard()
+    subsequentDeal()
 }
 
 function setOpponentMove() {
@@ -393,6 +396,11 @@ function setOpponentMove() {
 function changeBoard() {
     userPatch.div.append(userTile.div)
     opponentPatch.div.append(opponentTile.div)
+}
+
+function subsequentDeal() {
+    dealTileToUser()
+    dealTileToOpponent()
 }
 
 // Check for errors that would result in an unacceptable move: First move must be on a certain patch, subsequent moves must be on touching patches, and moves must be on 'inactive' patches
