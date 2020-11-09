@@ -186,7 +186,7 @@ function chooseTile() {
     generateRandomTileIndex()
     if (tiles[randomTileIndex].status === 'inactive') {
         choice = tiles[randomTileIndex]
-        console.log(choice.div)
+        // console.log(choice.div)
     } else {
         chooseTile()
     }
@@ -224,7 +224,7 @@ function openingDeal() {
 
 openingDeal()
 
-console.log(tiles)
+// console.log(tiles)
 
 // Display submit button
 
@@ -242,8 +242,8 @@ function selectPatch() {
         if (patches[i].status === 'inactive') {
             patches[i].div.addEventListener('click', function() {
                 userPatch = patches[i]
-                console.log(userPatch.name)
-                console.log(userPatch.div)
+                console.log(`User Patch: ${userPatch.name}`)
+                // console.log(userPatch.div)
             })
         }
     }
@@ -259,8 +259,8 @@ function selectTile() {
         if (tiles[i].status === 'user') {
             tiles[i].div.addEventListener('click', function() {
                 userTile = tiles[i]
-                console.log(userTile.name)
-                console.log(userTile.div)
+                console.log(`User Tile: ${userTile.name}`)
+                // console.log(userTile.div)
             })
         }
     }
@@ -284,7 +284,7 @@ function randomPatch() {
     generateRandomPatchIndex()
     if (smallPatches[randomPatchIndex].status === 'inactive') {
         opponentPatch = smallPatches[randomPatchIndex]
-        console.log(opponentPatch.div)
+        console.log(`Opponent Patch: ${opponentPatch.name}`)
     } else {
         randomPatch()
     }
@@ -297,7 +297,7 @@ function randomTile() {
     generateRandomTileIndex()
     if (tiles[randomTileIndex].status === 'opponent') {
         opponentTile = tiles[randomTileIndex]
-        console.log(opponentTile.div)
+        console.log(`Opponent Tile: ${opponentTile.name}`)
     } else {
         randomTile()
     }
@@ -314,6 +314,7 @@ function setUserMove() {
     setOpponentMove()
     changeBoard()
     subsequentDeal()
+    console.log('NEW ROUND')
 }
 
 function setOpponentMove() {
