@@ -342,6 +342,8 @@ function setUserMove() {
     opponentTile.status = 'board'
     userPatch = ''
     userTile = ''
+    let scores = tally()
+    console.log(`CURRENT SCORE: USER ${scores[0]}, OPPONENT ${scores[1]}`)
     subsequentDeal()
     selectPatch()
     selectTile()
@@ -418,6 +420,7 @@ function checkUserPairs() {
         }
     }
     if (userTile.color === userTopTile.color || userTile.color === userBottomTile.color || userTile.color === userLeftTile.color || userTile.color === userRightTile.color || userTile.number === userTopTile.number || userTile.number === userBottomTile.number || userTile.number === userLeftTile.number || userTile.number === userRightTile.number || userTile.shape === userTopTile.shape || userTile.shape === userBottomTile.shape || userTile.shape === userLeftTile.shape || userTile.shape === userRightTile.shape) {
+        userPatch.status = 'user captured'
         console.log('MATCH FOR USER')
     } else {
         console.log('NO MATCH FOR USER')
@@ -462,6 +465,7 @@ function checkOpponentPairs() {
         }
     }
     if (opponentTile.color === opponentTopTile.color || opponentTile.color === opponentBottomTile.color || opponentTile.color === opponentLeftTile.color || opponentTile.color === opponentRightTile.color || opponentTile.number === opponentTopTile.number || opponentTile.number === opponentBottomTile.number || opponentTile.number === opponentLeftTile.number || opponentTile.number === opponentRightTile.number || opponentTile.shape === opponentTopTile.shape || opponentTile.shape === opponentBottomTile.shape || opponentTile.shape === opponentLeftTile.shape || opponentTile.shape === opponentRightTile.shape) {
+        opponentPatch.status = 'opponent captured'
         console.log('MATCH FOR OPPONENT')
     } else {
         console.log('NO MATCH FOR OPPONENT')
