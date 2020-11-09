@@ -63,6 +63,7 @@ function createPatches() {
         }
     }
     for (let i = 0; i < patches.length; i++) {
+        patches[i].name = `r${patches[i].row}c${patches[i].column}`
         patches[i].div.classList.add('patch')
     }
     return patches
@@ -113,7 +114,7 @@ class Tile {
     }
 }
 
-// Store main game tiles in an array as objects, with keys including the tile name and status of the tile, which could have values of: 'inactive', 'user', 'opponent', 'user active', 'opponent active', and 'board' (but would begin as 'inactive)
+// Store main game tiles in an array as objects, with keys including the tile name and status of the tile, which could have values of: 'inactive', 'user', 'opponent', 'user active', 'opponent active', and 'board' (but would begin as 'inactive')
 
 let tiles = []
 
@@ -153,8 +154,6 @@ function createTiles() {
     }
     for (let i = 0; i < tiles.length; i++) {
         tiles[i].name = `${tiles[i].color} ${tiles[i].number} ${tiles[i].shape}`
-    }
-    for (let i = 0; i < tiles.length; i++) {
         tiles[i].div.classList.add('tile', tiles[i].color, tiles[i].number, tiles[i].shape)
     }
     return tiles
@@ -275,130 +274,49 @@ userTiles.appendChild(submit)
 
 // Select patch on board and tile from user's tiles, then click 'submit' button, then make that tile fill that patch
 
-for (let i = 0; i < patches.length; i++) {
-    patches[i].div.addEventListener('click', function() {
-        patches[i].status = 'active'
-        console.log(patches[i].status)
-    })
+let userPatch = ''
+
+function selectPatch() {
+    for (let i = 0; i < patches.length; i++) {
+        if (patches[i].status === 'inactive') {
+            patches[i].div.addEventListener('click', function() {
+                // patches[i].status = 'user active'
+                userPatch = patches[i].div
+                // console.log(patches[i].status)
+                console.log(patches[i].name)
+                console.log(userPatch)
+            })
+        }
+    }
+    return userPatch
 }
 
-for (let i = 0; i < tiles.length; i++) {
-    tiles[i].div.addEventListener('click', function() {
-        tiles[i].status = 'active'
-        console.log(tiles[i].status)
-    })
+selectPatch()
+
+let userTile = ''
+
+function selectTile() {
+    for (let i = 0; i < tiles.length; i++) {
+        if (tiles[i].status === 'user') {
+            tiles[i].div.addEventListener('click', function() {
+                // tiles[i].status = 'user active'
+                userTile = tiles[i].div
+                // console.log(tiles[i].status)
+                console.log(tiles[i].name)
+                console.log(userTile)
+            })
+        }
+    }
+    return userTile
 }
 
-// submit.addEventListener('click', changeBoard)
+selectTile()
 
-// const tileElements = document.querySelectorAll('.tile')
+function changeBoard() {
+    userPatch.append(userTile)
+}
 
-// console.log(tileElements)
-
-// function selectTile() {
-//     for (let i = 0; i < tiles.length; i++) {
-//         tileElements[i].addEventListener('click', console.log('clicked'))
-//     }
-// }
-
-// selectTile()
-
-// let activeTile = []
-
-// function selectTile() {
-//     for (let i = 0; i < tiles.length; i++) {
-//         if (tiles[i].status === 'user') {
-//             let tileElements = document.querySelectorAll('tile')
-//             for (let j = 0; j < tileElements.length; j++) {
-//                 tileElements[j].addEventListener('click', function() {
-//                     console.log('trying')
-//                 })
-//             }
-//         }
-//     }
-//     // return activeTile
-// }
-
-// selectTile()
-
-// document.addEventListener('click', function(event) {
-//     console.log(event.target.classList.value)
-// })
-
-// let selectedTile = ''
-
-// document.addEventListener('click', function(event) {
-//     let selectedTile = event.target.classList.value
-//     console.log(selectedTile)
-//     // return selectedTile
-// })
-
-// console.log(selectedTile)
-
-// document.addEventListener('click', function(event1) {
-//     let selectedTile = event1.target.classList.value
-//     document.addEventListener('click', function(event2) {
-//         let selectedPatch = event2.target.classList.value
-//         selectedPatch.appendChild(selectedTile)
-//     })
-// })
-
-// $(tiles[i]).click(function(){console.log('clicked')})
-
-// function selectTile() {
-//     for (let i = 0; i < tiles.length; i++) {
-//         if (tiles[i] === 'user') {
-//             $(tiles[i]).click(function(){console.log('clicked')})
-//         }
-//     }
-// }
-
-// selectTile()
-
-// const smallPatchesElements = document.querySelectorAll('.small-patch')
-
-// console.log(smallPatchesElements)
-
-// let activePatch = []
-
-// function selectPatch() {
-//     for (let i = 0; i < smallPatchesElements.length; i++) {
-//         smallPatchesElements[i].addEventListener('click', function() {
-//             activePatch.push(smallPatchesElements[i])
-//             console.log(activePatch[0])
-//         })
-//     }
-//     return activePatch
-// }
-
-// function selectPatch() {
-//     for (let i = 0; i < smallPatches.length; i++) {
-//         smallPatches[i].div.addEventListener('click', console.log('clicked'))
-//     }
-// }
-
-// selectPatch()
-
-// function changeBoard() {
-//     let userChoicePatch = selectPatch()[0]
-//     let userChoiceTile = selectTile()[0]
-//     userChoicePatch.append(userChoiceTile)
-//     opponentMove()
-// }
-
-// changeBoard()
-
-// function linkPatches() {
-//     for (let i = 0; i < smallPatches.length; i++) {
-//         smallPatches[i].element = smallPatchesElements[i]
-//     }
-//     return smallPatches
-// }
-
-// linkPatches()
-
-// console.log(smallPatches)
-// console.log(smallPatchesElements)
+submit.addEventListener('click', changeBoard)
 
 // AI performs similar function automatically: Choose patch at random and tile at random, and submit right after user submits
 
