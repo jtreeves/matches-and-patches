@@ -1,29 +1,37 @@
 // Create tile elements
 
+const bottom = document.querySelector('.bottom')
+
 let circleURL = ''
 
 function createCircleImage() {
     const circleImage = document.createElement('canvas')
     circleImage.width = 100;
     circleImage.height = 100;
-    document.body.append(circleImage)
+    bottom.append(circleImage)
     const ctx = circleImage.getContext('2d')
     ctx.fillStyle = 'green'
     ctx.beginPath()
     ctx.arc(50, 50, 25, 0, Math.PI * 2)
     ctx.fill()
-    circleURL = circleImage.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, '')
+    circleURL = circleImage.toDataURL('image/png')
+    // .replace(/^data:image\/(png|jpg);base64,/, '')
     return circleURL
 }
 
-createCircleImage()
+let circle = createCircleImage()
+
+console.log(circle)
+
+
 
 console.log(circleURL)
 
 const test = document.createElement('div')
-document.body.append(test)
+// bottom.append(test)
 test.style.backgroundImage = `url('${circleURL}')`
 test.innerText = 'hello'
+console.log(test)
 
 // Grab parts of webpage with query selectors
 
@@ -46,7 +54,7 @@ class Patch {
     }
 }
 
-// Store patches as objects in an array, with keys of the patch and values of: 'inactive', 'user active', 'opponent active', <name of tile>, and 'locked'
+// Store patches in an array as objects, with keys including the patch name and status of the patch, which could have values of:'inactive' (starting value), 'user active', 'opponent active', 'user captured', 'opponent captured', and <name of tile>
 
 let patches = []
 
@@ -139,7 +147,7 @@ class Tile {
     }
 }
 
-// Store main game tiles in an array as objects, with keys including the tile name and status of the tile, which could have values of: 'inactive', 'user', 'opponent', 'user active', 'opponent active', and 'board' (but would begin as 'inactive')
+// Store main game tiles in an array as objects, with keys including the tile name and status of the tile, which could have values of: 'inactive' (starting value), 'user', 'opponent', 'user active', 'opponent active', and 'board'
 
 let tiles = []
 
@@ -262,6 +270,7 @@ function selectPatch() {
         if (patches[i].status === 'inactive') {
             patches[i].div.addEventListener('click', function() {
                 userPatch = patches[i]
+                userPatch.status = 'user active'
                 console.log(`User Patch: ${userPatch.name}`)
             })
         }
@@ -278,6 +287,7 @@ function selectTile() {
         if (tiles[i].status === 'user') {
             tiles[i].div.addEventListener('click', function() {
                 userTile = tiles[i]
+                userTile.status = 'user active'
                 console.log(`User Tile: ${userTile.name}`)
             })
         }
@@ -302,6 +312,7 @@ function randomPatch() {
     generateRandomPatchIndex()
     if (smallPatches[randomPatchIndex].status === 'inactive') {
         opponentPatch = smallPatches[randomPatchIndex]
+        opponentPatch.status = 'opponent active'
         console.log(`Opponent Patch: ${opponentPatch.name}`)
     } else {
         randomPatch()
@@ -315,6 +326,7 @@ function randomTile() {
     generateRandomTileIndex()
     if (tiles[randomTileIndex].status === 'opponent') {
         opponentTile = tiles[randomTileIndex]
+        opponentTile.status = 'opponent active'
         console.log(`Opponent Tile: ${opponentTile.name}`)
     } else {
         randomTile()
@@ -327,23 +339,23 @@ function randomTile() {
 submit.addEventListener('click', setUserMove)
 
 function setUserMove() {
-    userPatch.status = userTile.name
-    userTile.status = 'board'
+    // userPatch.status = userTile.name
+    // userTile.status = 'board'
     setOpponentMove()
     changeBoard()
-    subsequentDeal()
-    userPatch = ''
-    userTile = ''
-    selectPatch()
-    selectTile()
-    console.log('NEW ROUND')
+    // subsequentDeal()
+    // userPatch = ''
+    // userTile = ''
+    // selectPatch()
+    // selectTile()
+    // console.log('NEW ROUND')
 }
 
 function setOpponentMove() {
     randomPatch()
     randomTile()
-    opponentPatch.status = opponentTile.name
-    opponentTile.status = 'board'
+    // opponentPatch.status = opponentTile.name
+    // opponentTile.status = 'board'
 }
 
 function changeBoard() {
@@ -365,6 +377,14 @@ function subsequentDeal() {
 // Change newly played tiles on the board to have values of 'user active' or 'opponent active', based on who played what, in the tiles object
 
 // Evaluate all possible match pairs for each player at the end of each round by looking at patches not marked with 'inactive' or 'locked' in patches object that are near patches occupied by <name of tile>, where that tile is marked as 'user active' or 'opponent active' in the tiles object
+
+function checkMatchPairs() {
+    for (let i = 0; i < patches.length; i++) {
+        if (patches[i].status === 'user active') {
+
+        }
+    }
+}
 
 // Check for conflicts that would result in match pair disputes: If each player is attempting to match with the same tile, tally the points going along with each match pair, and award the tile to the winner
 
