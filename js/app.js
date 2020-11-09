@@ -1,37 +1,37 @@
 // Create tile elements
 
-const bottom = document.querySelector('.bottom')
+// const bottom = document.querySelector('.bottom')
 
-let circleURL = ''
+// let circleURL = ''
 
-function createCircleImage() {
-    const circleImage = document.createElement('canvas')
-    circleImage.width = 100;
-    circleImage.height = 100;
-    bottom.append(circleImage)
-    const ctx = circleImage.getContext('2d')
-    ctx.fillStyle = 'green'
-    ctx.beginPath()
-    ctx.arc(50, 50, 25, 0, Math.PI * 2)
-    ctx.fill()
-    circleURL = circleImage.toDataURL('image/png')
-    // .replace(/^data:image\/(png|jpg);base64,/, '')
-    return circleURL
-}
+// function createCircleImage() {
+//     const circleImage = document.createElement('canvas')
+//     circleImage.width = 100;
+//     circleImage.height = 100;
+//     bottom.append(circleImage)
+//     const ctx = circleImage.getContext('2d')
+//     ctx.fillStyle = 'green'
+//     ctx.beginPath()
+//     ctx.arc(50, 50, 25, 0, Math.PI * 2)
+//     ctx.fill()
+//     circleURL = circleImage.toDataURL('image/png')
+//     // .replace(/^data:image\/(png|jpg);base64,/, '')
+//     return circleURL
+// }
 
-let circle = createCircleImage()
+// let circle = createCircleImage()
 
-console.log(circle)
+// console.log(circle)
 
 
 
-console.log(circleURL)
+// console.log(circleURL)
 
-const test = document.createElement('div')
-// bottom.append(test)
-test.style.backgroundImage = `url('${circleURL}')`
-test.innerText = 'hello'
-console.log(test)
+// const test = document.createElement('div')
+// // bottom.append(test)
+// test.style.backgroundImage = `url('${circleURL}')`
+// test.innerText = 'hello'
+// console.log(test)
 
 // Grab parts of webpage with query selectors
 
@@ -56,9 +56,8 @@ class Patch {
 
 // Store patches in an array as objects, with keys including the patch name and status of the patch, which could have values of:'inactive' (starting value), 'user active', 'opponent active', 'user captured', 'opponent captured', and <name of tile>
 
-let patches = []
-
 function createPatches() {
+    let patches = []
     for (let i = 0; i < 64; i++) {
         if (i < 8) {
             patches.push(new Patch(1, ''))
@@ -104,15 +103,14 @@ function createPatches() {
     return patches
 }
 
-createPatches()
+let patches = createPatches()
 
 console.log(patches)
 
 // Display 16-patch board, with CSS and object's first 16 instances
 
-let smallPatches = []
-
 function createSmallPatches() {
+    let smallPatches = []
     for (let i = 0; i < patches.length; i++) {
         if (patches[i].row <= 4 && patches[i].column <= 4) {
             smallPatches.push(patches[i])
@@ -121,7 +119,7 @@ function createSmallPatches() {
     return smallPatches
 }
 
-createSmallPatches()
+let smallPatches = createSmallPatches()
 
 console.log(smallPatches)
 
@@ -149,9 +147,8 @@ class Tile {
 
 // Store main game tiles in an array as objects, with keys including the tile name and status of the tile, which could have values of: 'inactive' (starting value), 'user', 'opponent', 'user active', 'opponent active', and 'board'
 
-let tiles = []
-
 function createTiles() {
+    let tiles = []
     for (let i = 0; i < 64; i++) {
         if (i < 16) {
             tiles.push(new Tile('red', '', ''))
@@ -192,7 +189,7 @@ function createTiles() {
     return tiles
 }
 
-createTiles()
+let tiles = createTiles()
 
 console.log(tiles)
 
@@ -211,10 +208,9 @@ function generateRandomTileIndex() {
     return randomTileIndex
 }
 
-let choice = ''
-
 function chooseTile() {
-    generateRandomTileIndex()
+    let choice = ''
+    let randomTileIndex = generateRandomTileIndex()
     if (tiles[randomTileIndex].status === 'inactive') {
         choice = tiles[randomTileIndex]
     } else {
@@ -226,7 +222,7 @@ function chooseTile() {
 // Deal tile to user by changing the tile's status to 'user'
 
 function dealTileToUser() {
-    chooseTile()
+    let choice = chooseTile()
     choice.status = 'user'
     userTiles.append(choice.div)
 }
@@ -234,7 +230,7 @@ function dealTileToUser() {
 // Deal tile to opponent by changing the tile's status to 'opponent'
 
 function dealTileToOpponent() {
-    chooseTile()
+    let choice = chooseTile()
     choice.status = 'opponent'
     opponentTiles.append(choice.div)
 }
