@@ -273,6 +273,22 @@ userTiles.appendChild(submit)
 
 // Select patch on board and tile from user's tiles, then click 'submit' button, then make that tile fill that patch
 
+for (let i = 0; i < patches.length; i++) {
+    document.getElementById(`patchElement${i}`).addEventListener('click', function(){
+        patches[i].status = 'active'
+        console.log(patches[i].status)
+    })
+}
+
+// document.addEventListener('DOMContentLoaded', test)
+
+// document.addEventListener('click', function(event) {
+//     console.log(event.target.parentNode.getAttribute('status'))
+//     // console.log(event.target.attributes)
+//     // console.log(smallPatches)
+// })
+
+
 // submit.addEventListener('click', changeBoard)
 
 const tileElements = document.querySelectorAll('.tile')
@@ -310,11 +326,6 @@ console.log(tileElements)
 // })
 
 // let selectedTile = ''
-
-document.addEventListener('click', function(event) {
-    console.log(event.target)
-    event.target.textContent = 'happy'
-})
 
 // document.addEventListener('click', function(event) {
 //     let selectedTile = event.target.classList.value
