@@ -280,11 +280,9 @@ function selectPatch() {
     for (let i = 0; i < patches.length; i++) {
         if (patches[i].status === 'inactive') {
             patches[i].div.addEventListener('click', function() {
-                // patches[i].status = 'user active'
-                userPatch = patches[i].div
-                // console.log(patches[i].status)
-                console.log(patches[i].name)
-                console.log(userPatch)
+                userPatch = patches[i]
+                console.log(userPatch.name)
+                console.log(userPatch.div)
             })
         }
     }
@@ -299,11 +297,9 @@ function selectTile() {
     for (let i = 0; i < tiles.length; i++) {
         if (tiles[i].status === 'user') {
             tiles[i].div.addEventListener('click', function() {
-                // tiles[i].status = 'user active'
-                userTile = tiles[i].div
-                // console.log(tiles[i].status)
-                console.log(tiles[i].name)
-                console.log(userTile)
+                userTile = tiles[i]
+                console.log(userTile.name)
+                console.log(userTile.div)
             })
         }
     }
@@ -313,12 +309,67 @@ function selectTile() {
 selectTile()
 
 function changeBoard() {
-    userPatch.append(userTile)
+    userPatch.div.append(userTile.div)
+    opponentPatch.div.append(opponentTile.div)
 }
 
-submit.addEventListener('click', changeBoard)
+function setUserMove() {
+    userPatch.status = userTile.name
+    userTile.status = 'board'
+    setOpponentMove()
+    changeBoard()
+}
+
+submit.addEventListener('click', setUserMove)
 
 // AI performs similar function automatically: Choose patch at random and tile at random, and submit right after user submits
+
+let randomPatchIndex = ''
+
+function generateRandomPatchIndex() {
+    randomPatchIndex = Math.floor(Math.random()*16)
+    return randomPatchIndex
+}
+
+let opponentPatch = ''
+
+function randomPatch() {
+    generateRandomPatchIndex()
+    if (smallPatches[randomPatchIndex].status === 'inactive') {
+        opponentPatch = smallPatches[randomPatchIndex]
+        console.log(opponentPatch.div)
+    } else {
+        randomPatch()
+    }
+    return opponentPatch
+}
+
+let randomTileIndex = ''
+
+function generateRandomTileIndex() {
+    randomTileIndex = Math.floor(Math.random()*64)
+    return randomTileIndex
+}
+
+let opponentTile = ''
+
+function randomTile() {
+    generateRandomTileIndex()
+    if (tiles[randomTileIndex].status === 'opponent') {
+        opponentTile = tiles[randomTileIndex]
+        console.log(opponentTile.div)
+    } else {
+        randomTile()
+    }
+    return opponentTile
+}
+
+function setOpponentMove() {
+    randomPatch()
+    randomTile()
+    opponentPatch.status = opponentTile.name
+    opponentTile.status = 'board'
+}
 
 // let opponentTileOptions = []
 
