@@ -335,23 +335,22 @@ function randomTile() {
 submit.addEventListener('click', setUserMove)
 
 function setUserMove() {
-    // userPatch.status = userTile.name
-    // userTile.status = 'board'
     setOpponentMove()
     changeBoard()
-    // subsequentDeal()
-    // userPatch = ''
-    // userTile = ''
-    // selectPatch()
-    // selectTile()
-    // console.log('NEW ROUND')
+    checkMatchPairs()
+    userTile.status = 'board'
+    opponentTile.status = 'board'
+    userPatch = ''
+    userTile = ''
+    subsequentDeal()
+    selectPatch()
+    selectTile()
+    console.log('NEW ROUND')
 }
 
 function setOpponentMove() {
     randomPatch()
     randomTile()
-    // opponentPatch.status = opponentTile.name
-    // opponentTile.status = 'board'
 }
 
 function changeBoard() {
@@ -375,10 +374,97 @@ function subsequentDeal() {
 // Evaluate all possible match pairs for each player at the end of each round by looking at patches not marked with 'inactive' or 'locked' in patches object that are near patches occupied by <name of tile>, where that tile is marked as 'user active' or 'opponent active' in the tiles object
 
 function checkMatchPairs() {
-    for (let i = 0; i < patches.length; i++) {
-        if (patches[i].status === 'user active') {
+    userPatch.status = userTile.name
+    opponentPatch.status = opponentTile.name
+    checkUserPairs()
+    checkOpponentPairs()
+}
 
+function checkUserPairs() { 
+    let userRow = userPatch.row
+    let userColumn = userPatch.column
+    let userTopPatchRow = userRow + 1
+    let userBottomPatchRow = userRow - 1
+    let userLeftPatchColumn = userColumn - 1
+    let userRightPatchColumn = userColumn + 1
+    let userTopPatch = ''
+    let userBottomPatch = ''
+    let userLeftPatch = ''
+    let userRightPatch = ''
+    for (let i = 0; i < patches.length; i++) {
+        if (patches[i].row === userTopPatchRow && patches[i].column === userColumn) {
+            userTopPatch = patches[i].status
+        } else if (patches[i].row === userBottomPatchRow && patches[i].column === userColumn) {
+            userBottomPatch = patches[i].status
+        } else if (patches[i].row === userRow && patches[i].column === userLeftPatchColumn) {
+            userLeftPatch = patches[i].status
+        } else if (patches[i].row === userRow && patches[i].column === userRightPatchColumn) {
+            userRightPatch = patches[i].status
         }
+    }
+    let userTopTile = ''
+    let userBottomTile = ''
+    let userLeftTile = ''
+    let userRightTile = ''
+    for (let i = 0; i < tiles.length; i++) {
+        if (tiles[i].name === userTopPatch) {
+            userTopTile = tiles[i]
+        } else if (tiles[i].name === userBottomPatch) {
+            userBottomTile = tiles[i]
+        } else if (tiles[i].name === userLeftPatch) {
+            userLeftTile = tiles[i]
+        } else if (tiles[i].name === userRightPatch) {
+            userRightTile = tiles[i]
+        }
+    }
+    if (userTile.color === userTopTile.color || userTile.color === userBottomTile.color || userTile.color === userLeftTile.color || userTile.color === userRightTile.color || userTile.number === userTopTile.number || userTile.number === userBottomTile.number || userTile.number === userLeftTile.number || userTile.number === userRightTile.number || userTile.shape === userTopTile.shape || userTile.shape === userBottomTile.shape || userTile.shape === userLeftTile.shape || userTile.shape === userRightTile.shape) {
+        console.log('MATCH FOR USER')
+    } else {
+        console.log('NO MATCH FOR USER')
+    }
+}
+
+function checkOpponentPairs() { 
+    let opponentRow = opponentPatch.row
+    let opponentColumn = opponentPatch.column
+    let opponentTopPatchRow = opponentRow + 1
+    let opponentBottomPatchRow = opponentRow - 1
+    let opponentLeftPatchColumn = opponentColumn - 1
+    let opponentRightPatchColumn = opponentColumn + 1
+    let opponentTopPatch = ''
+    let opponentBottomPatch = ''
+    let opponentLeftPatch = ''
+    let opponentRightPatch = ''
+    for (let i = 0; i < patches.length; i++) {
+        if (patches[i].row === opponentTopPatchRow && patches[i].column === opponentColumn) {
+            opponentTopPatch = patches[i].status
+        } else if (patches[i].row === opponentBottomPatchRow && patches[i].column === opponentColumn) {
+            opponentBottomPatch = patches[i].status
+        } else if (patches[i].row === opponentRow && patches[i].column === opponentLeftPatchColumn) {
+            opponentLeftPatch = patches[i].status
+        } else if (patches[i].row === opponentRow && patches[i].column === opponentRightPatchColumn) {
+            opponentRightPatch = patches[i].status
+        }
+    }
+    let opponentTopTile = ''
+    let opponentBottomTile = ''
+    let opponentLeftTile = ''
+    let opponentRightTile = ''
+    for (let i = 0; i < tiles.length; i++) {
+        if (tiles[i].name === opponentTopPatch) {
+            opponentTopTile = tiles[i]
+        } else if (tiles[i].name === opponentBottomPatch) {
+            opponentBottomTile = tiles[i]
+        } else if (tiles[i].name === opponentLeftPatch) {
+            opponentLeftTile = tiles[i]
+        } else if (tiles[i].name === opponentRightPatch) {
+            opponentRightTile = tiles[i]
+        }
+    }
+    if (opponentTile.color === opponentTopTile.color || opponentTile.color === opponentBottomTile.color || opponentTile.color === opponentLeftTile.color || opponentTile.color === opponentRightTile.color || opponentTile.number === opponentTopTile.number || opponentTile.number === opponentBottomTile.number || opponentTile.number === opponentLeftTile.number || opponentTile.number === opponentRightTile.number || opponentTile.shape === opponentTopTile.shape || opponentTile.shape === opponentBottomTile.shape || opponentTile.shape === opponentLeftTile.shape || opponentTile.shape === opponentRightTile.shape) {
+        console.log('MATCH FOR OPPONENT')
+    } else {
+        console.log('NO MATCH FOR OPPONENT')
     }
 }
 
@@ -391,6 +477,18 @@ function checkMatchPairs() {
 // Deal new tile to each player at end of each round; involves changing the tile's value in the tile object
 
 // Create tally for each player that tallies their tokens on the board
+
+function tally() {
+    let scores = [0, 0]
+    for (let i = 0; i < patches.length; i++) {
+        if (patches[i].status === 'user captured') {
+            scores[0]++
+        } else if (patches[i].status === 'opponent captured') {
+            scores[1]++
+        }
+    }
+    return scores
+}
 
 // Update tally after each round by incrementing by however many pieces were captured
 

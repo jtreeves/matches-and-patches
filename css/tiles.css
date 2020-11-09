@@ -47,6 +47,16 @@
     border-radius: 50%;
 }
 
+/* .circle {
+    background-image: url('images/circle.png') / cover;
+    position: relative;
+}
+
+.circle::before {
+    position: absolute;
+    background-color:  rgba(36, 70, 105, 0.74) ;
+} */
+
 .one::before {
     content: '1';
     padding: 25%;
