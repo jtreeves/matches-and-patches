@@ -11,13 +11,11 @@ const options = document.querySelector('.options')
 // Create board's 64 patches with class
 
 class Patch {
-    constructor(i, row, column) {
-        this.element = `patchElement${i}`;
+    constructor(row, column) {
         this.row = row;
         this.column = column;
         this.status = 'inactive';
         this.div = document.createElement('div');
-        this.div.id = this.element;
     }
 }
 
@@ -28,21 +26,21 @@ let patches = []
 function createPatches() {
     for (let i = 0; i < 64; i++) {
         if (i < 8) {
-            patches.push(new Patch(i, 1, ''))
+            patches.push(new Patch(1, ''))
         } else if (i < 16) {
-            patches.push(new Patch(i, 2, ''))
+            patches.push(new Patch(2, ''))
         } else if (i < 24) {
-            patches.push(new Patch(i, 3, ''))
+            patches.push(new Patch(3, ''))
         } else if (i < 32) {
-            patches.push(new Patch(i, 4, ''))
+            patches.push(new Patch(4, ''))
         } else if (i < 40) {
-            patches.push(new Patch(i, 5, ''))
+            patches.push(new Patch(5, ''))
         } else if (i < 48) {
-            patches.push(new Patch(i, 6, ''))
+            patches.push(new Patch(6, ''))
         } else if (i < 56) {
-            patches.push(new Patch(i, 7, ''))
+            patches.push(new Patch(7, ''))
         } else {
-            patches.push(new Patch(i, 8, ''))
+            patches.push(new Patch(8, ''))
         }
     }
     for (let i = 0; i < patches.length; i++) {
@@ -105,14 +103,12 @@ displaySmallBoard(smallPatches)
 // Create main game tiles with class
 
 class Tile {
-    constructor(i, color, number, shape) {
-        this.element = `tileElement${i}`;
+    constructor(color, number, shape) {
         this.color = color;
         this.number = number;
         this.shape = shape;
         this.status = 'inactive';
         this.div = document.createElement('div');
-        this.div.id = this.element;
     }
 }
 
@@ -123,13 +119,13 @@ let tiles = []
 function createTiles() {
     for (let i = 0; i < 64; i++) {
         if (i < 16) {
-            tiles.push(new Tile(i, 'red', '', ''))
+            tiles.push(new Tile('red', '', ''))
         } else if (i < 32) {
-            tiles.push(new Tile(i, 'blue', '', ''))
+            tiles.push(new Tile('blue', '', ''))
         } else if (i < 48) {
-            tiles.push(new Tile(i, 'yellow', '', ''))
+            tiles.push(new Tile('yellow', '', ''))
         } else {
-            tiles.push(new Tile(i, 'green', '', ''))
+            tiles.push(new Tile('green', '', ''))
         }
     }
     for (let i = 0; i < tiles.length; i ++) {
@@ -186,7 +182,6 @@ function chooseTile() {
     generateRandomTileIndex()
     if (tiles[randomTileIndex].status === 'inactive') {
         choice = tiles[randomTileIndex]
-        // console.log(choice.div)
     } else {
         chooseTile()
     }
@@ -224,8 +219,6 @@ function openingDeal() {
 
 openingDeal()
 
-// console.log(tiles)
-
 // Display submit button
 
 const submit = document.createElement('div')
@@ -243,7 +236,6 @@ function selectPatch() {
             patches[i].div.addEventListener('click', function() {
                 userPatch = patches[i]
                 console.log(`User Patch: ${userPatch.name}`)
-                // console.log(userPatch.div)
             })
         }
     }
@@ -260,7 +252,6 @@ function selectTile() {
             tiles[i].div.addEventListener('click', function() {
                 userTile = tiles[i]
                 console.log(`User Tile: ${userTile.name}`)
-                // console.log(userTile.div)
             })
         }
     }
@@ -314,6 +305,8 @@ function setUserMove() {
     setOpponentMove()
     changeBoard()
     subsequentDeal()
+    userPatch = ''
+    userTile = ''
     console.log('NEW ROUND')
 }
 
