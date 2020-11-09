@@ -6,6 +6,8 @@ const userTiles = document.querySelector('.user-tiles')
 
 const opponentTiles = document.querySelector('.opponent-tiles')
 
+const options = document.querySelector('.options')
+
 // Create board's 64 patches with class
 
 class Patch {
@@ -171,17 +173,6 @@ console.log(tokens)
 
 // Choose one tile at random from the 'inactive' elements of the tiles object
 
-// let optionalTiles = []
-
-// function determineOptions() {
-//     for (let i = 0; i < tiles.length; i++) {
-//         if (tiles[i].status === 'inactive') {
-//             optionalTiles.push(tiles[i])
-//         }
-//     }
-//     return optionalTiles
-// }
-
 let randomTileIndex = ''
 
 function generateRandomTileIndex() {
@@ -210,18 +201,6 @@ function dealTileToUser() {
     userTiles.append(choice.div)
 }
 
-// let dealtUser = ''
-
-// function dealTileToUser() {
-//     dealtUser = chooseTile()
-//     for (let i = 0; i < tiles.length; i++) {
-//         if (tiles[i].name === dealtUser.name) {
-//             tiles[i].status = 'user'
-//         }
-//     }
-//     return dealtUser
-// }
-
 // Deal tile to opponent by changing the tile's status to 'opponent'
 
 function dealTileToOpponent() {
@@ -230,36 +209,16 @@ function dealTileToOpponent() {
     opponentTiles.append(choice.div)
 }
 
-// let dealtOpponent = ''
-
-// function dealTileToOpponent() {
-//     dealtOpponent = chooseTile()
-//     for (let i = 0; i < tiles.length; i++) {
-//         if (tiles[i].name === dealtOpponent.name) {
-//             tiles[i].status = 'opponent'
-//         }
-//     }
-//     return dealtOpponent
-// }
-
 // Deal each side four tiles by using the above functions
 
 function openingDeal() {
-    // determineOptions()
     dealTileToUser()
-    // determineOptions()
     dealTileToOpponent()
-    // determineOptions()
     dealTileToUser()
-    // determineOptions()
     dealTileToOpponent()
-    // determineOptions()
     dealTileToUser()
-    // determineOptions()
     dealTileToOpponent()
-    // determineOptions()
     dealTileToUser()
-    // determineOptions()
     dealTileToOpponent()
 }
 
@@ -267,34 +226,12 @@ openingDeal()
 
 console.log(tiles)
 
-// Display tiles from the tiles object with a value of 'user' at the bottom of the page
-
-// function displayUserTiles(array) {
-//     for (let i = 0; i < array.length; i++) {
-//         if (array[i].status === 'user') {
-//             userTiles.appendChild(array[i].div)
-//         }
-//     }
-// }
-
-// displayUserTiles(tiles)
-
-// function displayOpponentTiles(array) {
-//     for (let i = 0; i < array.length; i++) {
-//         if (array[i].status === 'opponent') {
-//             opponentTiles.appendChild(array[i].div)
-//         }
-//     }
-// }
-
-// displayOpponentTiles(tiles)
-
 // Display submit button
 
 const submit = document.createElement('div')
 submit.textContent = 'Submit'
 submit.classList.add('button')
-userTiles.appendChild(submit)
+options.append(submit)
 
 // Select patch on board and tile from user's tiles
 
@@ -353,13 +290,6 @@ function randomPatch() {
     }
     return opponentPatch
 }
-
-// let randomTileIndex = ''
-
-// function generateRandomTileIndex() {
-//     randomTileIndex = Math.floor(Math.random()*64)
-//     return randomTileIndex
-// }
 
 let opponentTile = ''
 
