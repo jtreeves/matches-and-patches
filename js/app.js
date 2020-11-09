@@ -171,71 +171,93 @@ console.log(tokens)
 
 // Choose one tile at random from the 'inactive' elements of the tiles object
 
-let optionalTiles = []
+// let optionalTiles = []
 
-function determineOptions() {
-    for (let i = 0; i < tiles.length; i++) {
-        if (tiles[i].status === 'inactive') {
-            optionalTiles.push(tiles[i])
-        }
-    }
-    return optionalTiles
+// function determineOptions() {
+//     for (let i = 0; i < tiles.length; i++) {
+//         if (tiles[i].status === 'inactive') {
+//             optionalTiles.push(tiles[i])
+//         }
+//     }
+//     return optionalTiles
+// }
+
+let randomTileIndex = ''
+
+function generateRandomTileIndex() {
+    randomTileIndex = Math.floor(Math.random()*64)
+    return randomTileIndex
 }
 
 let choice = ''
 
 function chooseTile() {
-    let choiceIndex = Math.floor(Math.random()*optionalTiles.length)
-    choice = optionalTiles[choiceIndex]
+    generateRandomTileIndex()
+    if (tiles[randomTileIndex].status === 'inactive') {
+        choice = tiles[randomTileIndex]
+        console.log(choice.div)
+    } else {
+        chooseTile()
+    }
     return choice
 }
 
 // Deal tile to user by changing the tile's status to 'user'
 
-let dealtUser = ''
-
 function dealTileToUser() {
-    dealtUser = chooseTile()
-    for (let i = 0; i < tiles.length; i++) {
-        if (tiles[i].name === dealtUser.name) {
-            tiles[i].status = 'user'
-        }
-    }
-    return dealtUser
+    chooseTile()
+    choice.status = 'user'
 }
+
+// let dealtUser = ''
+
+// function dealTileToUser() {
+//     dealtUser = chooseTile()
+//     for (let i = 0; i < tiles.length; i++) {
+//         if (tiles[i].name === dealtUser.name) {
+//             tiles[i].status = 'user'
+//         }
+//     }
+//     return dealtUser
+// }
 
 // Deal tile to opponent by changing the tile's status to 'opponent'
 
-let dealtOpponent = ''
-
 function dealTileToOpponent() {
-    dealtOpponent = chooseTile()
-    for (let i = 0; i < tiles.length; i++) {
-        if (tiles[i].name === dealtOpponent.name) {
-            tiles[i].status = 'opponent'
-        }
-    }
-    return dealtOpponent
+    chooseTile()
+    choice.status = 'opponent'
 }
+
+// let dealtOpponent = ''
+
+// function dealTileToOpponent() {
+//     dealtOpponent = chooseTile()
+//     for (let i = 0; i < tiles.length; i++) {
+//         if (tiles[i].name === dealtOpponent.name) {
+//             tiles[i].status = 'opponent'
+//         }
+//     }
+//     return dealtOpponent
+// }
 
 // Deal each side four tiles by using the above functions
 
 function openingDeal() {
-    determineOptions()
+    // determineOptions()
     dealTileToUser()
-    determineOptions()
+    // determineOptions()
     dealTileToOpponent()
-    determineOptions()
+    // determineOptions()
     dealTileToUser()
-    determineOptions()
+    // determineOptions()
     dealTileToOpponent()
-    determineOptions()
+    // determineOptions()
     dealTileToUser()
-    determineOptions()
+    // determineOptions()
     dealTileToOpponent()
-    determineOptions()
+    // determineOptions()
     dealTileToUser()
-    determineOptions()
+    // determineOptions()
     dealTileToOpponent()
 }
 
@@ -330,12 +352,12 @@ function randomPatch() {
     return opponentPatch
 }
 
-let randomTileIndex = ''
+// let randomTileIndex = ''
 
-function generateRandomTileIndex() {
-    randomTileIndex = Math.floor(Math.random()*64)
-    return randomTileIndex
-}
+// function generateRandomTileIndex() {
+//     randomTileIndex = Math.floor(Math.random()*64)
+//     return randomTileIndex
+// }
 
 let opponentTile = ''
 
