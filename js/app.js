@@ -346,8 +346,6 @@ function setUserMove() {
     checkMatchPairs()
     userTile.status = 'board'
     opponentTile.status = 'board'
-    userPatch = ''
-    userTile = ''
     let scores = tally()
     console.log(`CURRENT SCORE: USER ${scores[0]}, OPPONENT ${scores[1]}`)
     subsequentDeal()
