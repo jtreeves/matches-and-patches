@@ -195,9 +195,15 @@ console.log(tiles)
 
 // Store players' tokens in an array
 
-const tokens = ['user', 'opponent']
+// const tokens = ['user', 'opponent']
 
-console.log(tokens)
+// console.log(tokens)
+
+const userToken = document.createElement('div')
+userToken.classList.add('token', 'user')
+
+const opponentToken = document.createElement('div')
+opponentToken.classList.add('token', 'opponent')
 
 // Choose one tile at random from the 'inactive' elements of the tiles object
 
@@ -348,6 +354,7 @@ function setUserMove() {
     selectPatch()
     selectTile()
     console.log('NEW ROUND')
+    tokenUpgrade()
 }
 
 function setOpponentMove() {
@@ -419,9 +426,22 @@ function checkUserPairs() {
             userRightTile = tiles[i]
         }
     }
-    if (userTile.color === userTopTile.color || userTile.color === userBottomTile.color || userTile.color === userLeftTile.color || userTile.color === userRightTile.color || userTile.number === userTopTile.number || userTile.number === userBottomTile.number || userTile.number === userLeftTile.number || userTile.number === userRightTile.number || userTile.shape === userTopTile.shape || userTile.shape === userBottomTile.shape || userTile.shape === userLeftTile.shape || userTile.shape === userRightTile.shape) {
+    if (userTile.color === userTopTile.color || userTile.number === userTopTile.number || userTile.shape === userTopTile.shape) {
         userPatch.status = 'user captured'
-        console.log('MATCH FOR USER')
+        userTopPatch = 'user captured'
+        console.log('USER MATCHED WITH TOP')
+    } else if (userTile.color === userBottomTile.color || userTile.number === userBottomTile.number || userTile.shape === userBottomTile.shape) {
+        userPatch.status = 'user captured'
+        userBottomPatch = 'user captured'
+        console.log('USER MATCHED WITH BOTTOM')
+    } else if (userTile.color === userLeftTile.color || userTile.number === userLeftTile.number || userTile.shape === userLeftTile.shape) {
+        userPatch.status = 'user captured'
+        userLeftPatch = 'user captured'
+        console.log('USER MATCHED WITH LEFT')
+    } else if (userTile.color === userRightTile.color || userTile.number === userRightTile.number || userTile.shape === userRightTile.shape) {
+        userPatch.status = 'user captured'
+        userRightPatch = 'user captured'
+        console.log('USER MATCHED WITH RIGHT')
     } else {
         console.log('NO MATCH FOR USER')
     }
@@ -464,9 +484,22 @@ function checkOpponentPairs() {
             opponentRightTile = tiles[i]
         }
     }
-    if (opponentTile.color === opponentTopTile.color || opponentTile.color === opponentBottomTile.color || opponentTile.color === opponentLeftTile.color || opponentTile.color === opponentRightTile.color || opponentTile.number === opponentTopTile.number || opponentTile.number === opponentBottomTile.number || opponentTile.number === opponentLeftTile.number || opponentTile.number === opponentRightTile.number || opponentTile.shape === opponentTopTile.shape || opponentTile.shape === opponentBottomTile.shape || opponentTile.shape === opponentLeftTile.shape || opponentTile.shape === opponentRightTile.shape) {
+    if (opponentTile.color === opponentTopTile.color || opponentTile.number === opponentTopTile.number || opponentTile.shape === opponentTopTile.shape) {
         opponentPatch.status = 'opponent captured'
-        console.log('MATCH FOR OPPONENT')
+        opponentTopPatch = 'opponent captured'
+        console.log('OPPONENT MATCHED WITH TOP')
+    } else if (opponentTile.color === opponentBottomTile.color || opponentTile.number === opponentBottomTile.number || opponentTile.shape === opponentBottomTile.shape) {
+        opponentPatch.status = 'opponent captured'
+        opponentBottomPatch = 'opponent captured'
+        console.log('OPPONENT MATCHED WITH BOTTOM')
+    } else if (opponentTile.color === opponentLeftTile.color || opponentTile.number === opponentLeftTile.number || opponentTile.shape === opponentLeftTile.shape) {
+        opponentPatch.status = 'opponent captured'
+        opponentLeftPatch = 'opponent captured'
+        console.log('OPPONENT MATCHED WITH LEFT')
+    } else if (opponentTile.color === opponentRightTile.color || opponentTile.number === opponentRightTile.number || opponentTile.shape === opponentRightTile.shape) {
+        opponentPatch.status = 'opponent captured'
+        opponentRightPatch = 'opponent captured'
+        console.log('OPPONENT MATCHED WITH RIGHT')
     } else {
         console.log('NO MATCH FOR OPPONENT')
     }
@@ -475,6 +508,22 @@ function checkOpponentPairs() {
 // Check for conflicts that would result in match pair disputes: If each player is attempting to match with the same tile, tally the points going along with each match pair, and award the tile to the winner
 
 // Replace match pairs with player tokens on the patches; this changes display with the element from the array and the patch's value in the patches object to 'locked'
+
+function tokenUpgrade() {
+    for (let i = 0; i < patches.length; i++) {
+        if (patches[i].status === 'user captured') {
+            // while (userPatch.div.firstChild) {
+            //     userPatch.div.removeChild(userPatch.div.firstChild)
+            // }
+            userPatch.div.append(userToken)
+        } else if (patches[i].status === 'opponent captured') {
+            // while (opponentPatch.div.firstChild) {
+            //     opponentPatch.div.removeChild(opponentPatch.div.firstChild)
+            // }
+            opponentPatch.div.append(opponentToken)
+        }
+    }
+}
 
 // Change tile's value in tile object to 'board'
 
