@@ -307,6 +307,8 @@ function setUserMove() {
     subsequentDeal()
     userPatch = ''
     userTile = ''
+    selectPatch()
+    selectTile()
     console.log('NEW ROUND')
 }
 
