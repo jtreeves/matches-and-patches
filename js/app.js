@@ -272,7 +272,7 @@ submit.textContent = 'Submit'
 submit.classList.add('button')
 userTiles.appendChild(submit)
 
-// Select patch on board and tile from user's tiles, then click 'submit' button, then make that tile fill that patch
+// Select patch on board and tile from user's tiles
 
 let userPatch = ''
 
@@ -308,21 +308,7 @@ function selectTile() {
 
 selectTile()
 
-function changeBoard() {
-    userPatch.div.append(userTile.div)
-    opponentPatch.div.append(opponentTile.div)
-}
-
-function setUserMove() {
-    userPatch.status = userTile.name
-    userTile.status = 'board'
-    setOpponentMove()
-    changeBoard()
-}
-
-submit.addEventListener('click', setUserMove)
-
-// AI performs similar function automatically: Choose patch at random and tile at random, and submit right after user submits
+// AI performs similar functions: Choose patch at random and tile at random
 
 let randomPatchIndex = ''
 
@@ -364,6 +350,17 @@ function randomTile() {
     return opponentTile
 }
 
+// Change board: After clicking 'submit' button, display user and opponent's moves simultaneously
+
+submit.addEventListener('click', setUserMove)
+
+function setUserMove() {
+    userPatch.status = userTile.name
+    userTile.status = 'board'
+    setOpponentMove()
+    changeBoard()
+}
+
 function setOpponentMove() {
     randomPatch()
     randomTile()
@@ -371,59 +368,10 @@ function setOpponentMove() {
     opponentTile.status = 'board'
 }
 
-// let opponentTileOptions = []
-
-// function opponentTiles() {
-//     for (let i = 0; i < tiles.length; i++) {
-//         if (tiles[i].status === 'opponent') {
-//             opponentTileOptions.push(tiles[i])
-//         }
-//     }
-//     return opponentTileOptions
-// }
-
-// // opponentTiles()
-
-// // console.log(opponentTileOptions)
-
-// let randomTile = ''
-
-// function chooseRandomTile() {
-//     opponentTiles()
-//     randomTile = opponentTileOptions[Math.floor(Math.random()*opponentTileOptions.length)]
-//     return randomTile
-// }
-
-// // chooseRandomTile()
-
-// // console.log(randomTile)
-
-// let randomPatch = ''
-
-// function chooseRandomPatch() {
-//     randomPatch = smallPatchesElements[Math.floor(Math.random()*16)]
-//     return randomPatch
-// }
-
-// // chooseRandomPatch()
-
-// // console.log(randomPatch)
-
-// function opponentMove() {
-//     chooseRandomTile()
-//     chooseRandomPatch()
-//     let opponentTile = document.createElement('div')
-//     opponentTile.classList.add('tile', randomTile.color, randomTile.number, randomTile.shape)
-//     randomPatch.append(opponentTile)
-// }
-
-// // opponentMove()
-
-// const opponent = document.createElement('div')
-// opponent.textContent = 'Opponent'
-// opponent.classList.add('button')
-// userTiles.appendChild(opponent)
-// opponent.addEventListener('click', opponentMove)
+function changeBoard() {
+    userPatch.div.append(userTile.div)
+    opponentPatch.div.append(opponentTile.div)
+}
 
 // Check for errors that would result in an unacceptable move: First move must be on a certain patch, subsequent moves must be on touching patches, and moves must be on 'inactive' patches
 
