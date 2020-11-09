@@ -62,6 +62,9 @@ function createPatches() {
             patches[i].column = 8
         }
     }
+    for (let i = 0; i < patches.length; i++) {
+        patches[i].div.classList.add('patch')
+    }
     return patches
 }
 
@@ -89,7 +92,7 @@ console.log(smallPatches)
 function displaySmallBoard(array) {
     for (let i = 0; i < array.length; i++) {
         let smallPatch = array[i].div
-        smallPatch.classList.add('small-patch')
+        smallPatch.classList.add('small')
         smallBoard.appendChild(smallPatch)
     }
 }
@@ -150,6 +153,9 @@ function createTiles() {
     }
     for (let i = 0; i < tiles.length; i++) {
         tiles[i].name = `${tiles[i].color} ${tiles[i].number} ${tiles[i].shape}`
+    }
+    for (let i = 0; i < tiles.length; i++) {
+        tiles[i].div.classList.add('tile', tiles[i].color, tiles[i].number, tiles[i].shape)
     }
     return tiles
 }
@@ -243,9 +249,7 @@ console.log(tiles)
 function displayUserTiles(array) {
     for (let i = 0; i < array.length; i++) {
         if (array[i].status === 'user') {
-            let userTile = array[i].div
-            userTile.classList.add('tile', tiles[i].color, tiles[i].number, tiles[i].shape)
-            userTiles.appendChild(userTile)
+            userTiles.appendChild(array[i].div)
         }
     }
 }
@@ -255,9 +259,7 @@ displayUserTiles(tiles)
 function displayOpponentTiles(array) {
     for (let i = 0; i < array.length; i++) {
         if (array[i].status === 'opponent') {
-            let opponentTile = array[i].div
-            opponentTile.classList.add('tile', tiles[i].color, tiles[i].number, tiles[i].shape)
-            opponentTiles.appendChild(opponentTile)
+            opponentTiles.appendChild(array[i].div)
         }
     }
 }
@@ -274,26 +276,24 @@ userTiles.appendChild(submit)
 // Select patch on board and tile from user's tiles, then click 'submit' button, then make that tile fill that patch
 
 for (let i = 0; i < patches.length; i++) {
-    document.getElementById(`patchElement${i}`).addEventListener('click', function(){
+    patches[i].div.addEventListener('click', function() {
         patches[i].status = 'active'
         console.log(patches[i].status)
     })
 }
 
-// document.addEventListener('DOMContentLoaded', test)
-
-// document.addEventListener('click', function(event) {
-//     console.log(event.target.parentNode.getAttribute('status'))
-//     // console.log(event.target.attributes)
-//     // console.log(smallPatches)
-// })
-
+for (let i = 0; i < tiles.length; i++) {
+    tiles[i].div.addEventListener('click', function() {
+        tiles[i].status = 'active'
+        console.log(tiles[i].status)
+    })
+}
 
 // submit.addEventListener('click', changeBoard)
 
-const tileElements = document.querySelectorAll('.tile')
+// const tileElements = document.querySelectorAll('.tile')
 
-console.log(tileElements)
+// console.log(tileElements)
 
 // function selectTile() {
 //     for (let i = 0; i < tiles.length; i++) {

@@ -25,7 +25,7 @@
     border: 1px solid black;
 }
 
-.small-patch {
+.patch.small {
     display: flex;
     justify-content: center;
     align-items: center;
