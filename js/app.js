@@ -1,3 +1,30 @@
+// Create tile elements
+
+let circleURL = ''
+
+function createCircleImage() {
+    const circleImage = document.createElement('canvas')
+    circleImage.width = 100;
+    circleImage.height = 100;
+    document.body.append(circleImage)
+    const ctx = circleImage.getContext('2d')
+    ctx.fillStyle = 'green'
+    ctx.beginPath()
+    ctx.arc(50, 50, 25, 0, Math.PI * 2)
+    ctx.fill()
+    circleURL = circleImage.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, '')
+    return circleURL
+}
+
+createCircleImage()
+
+console.log(circleURL)
+
+const test = document.createElement('div')
+document.body.append(test)
+test.style.backgroundImage = `url('${circleURL}')`
+test.innerText = 'hello'
+
 // Grab parts of webpage with query selectors
 
 const smallBoard = document.querySelector('.small-board')
