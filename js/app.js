@@ -268,10 +268,10 @@ options.append(submit)
 let userPatch = ''
 
 function selectPatch() {
-    for (let i = 0; i < patches.length; i++) {
-        if (patches[i].status === 'inactive') {
-            patches[i].div.addEventListener('click', function() {
-                userPatch = patches[i]
+    for (let i = 0; i < smallPatches.length; i++) {
+        if (smallPatches[i].status === 'inactive') {
+            smallPatches[i].div.addEventListener('click', function() {
+                userPatch = smallPatches[i]
                 userPatch.status = 'user active'
                 console.log(`User Patch: ${userPatch.name}`)
             })
