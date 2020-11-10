@@ -1,9 +1,7 @@
 // Grab parts of webpage with query selectors
 
 const smallBoard = document.querySelector('.small-board')
-
 const userTiles = document.querySelector('.user-tiles')
-
 const options = document.querySelector('.options')
 
 // Create board's 64 patches with class
@@ -84,8 +82,6 @@ function createSmallPatches() {
 
 let smallPatches = createSmallPatches()
 
-console.log(smallPatches)
-
 function displaySmallBoard(array) {
     for (let i = 0; i < array.length; i++) {
         let smallPatch = array[i].div
@@ -154,13 +150,7 @@ function createTiles() {
 
 let tiles = createTiles()
 
-console.log(tiles)
-
-// Store players' tokens in an array
-
-// const tokens = ['user', 'opponent']
-
-// console.log(tokens)
+// Creat players' tokens with a class
 
 class Token {
     constructor() {
@@ -181,25 +171,12 @@ function createTokens(player) {
 const userTokens = createTokens('user')
 const opponentTokens = createTokens('opponent')
 
-console.log(userTokens)
-console.log(opponentTokens)
-
-// options.append(userTokens[0].div)
-// options.append(opponentTokens[0].div)
-
-// const userToken = document.createElement('div')
-// userToken.classList.add('token', 'user')
-
-// const opponentToken = document.createElement('div')
-// opponentToken.classList.add('token', 'opponent')
-
 // Choose one tile at random from the 'inactive' elements of the tiles object
 
 let randomTileIndex = ''
 
 function generateRandomTileIndex() {
     randomTileIndex = Math.floor(Math.random()*64)
-    console.log(randomTileIndex)
     return randomTileIndex
 }
 
@@ -208,7 +185,6 @@ function chooseTile() {
     let randomTileIndex = generateRandomTileIndex()
     if (tiles[randomTileIndex].status === 'inactive') {
         choice = tiles[randomTileIndex]
-        console.log('inside chooseTile()')
     } else {
         choice = chooseTile()
     }
@@ -220,7 +196,6 @@ function chooseTile() {
 function dealTileToUser() {
     let choice = chooseTile()
     choice.status = 'user'
-    console.log(choice)
     userTiles.append(choice.div)
 }
 
@@ -229,8 +204,6 @@ function dealTileToUser() {
 function dealTileToOpponent() {
     let choice = chooseTile()
     choice.status = 'opponent'
-    console.log(choice)
-    // opponentTiles.append(choice.div)
 }
 
 // Deal each side four tiles by using the above functions
@@ -244,8 +217,6 @@ function openingDeal() {
     dealTileToOpponent()
     dealTileToUser()
     dealTileToOpponent()
-    console.log(userTiles)
-    // console.log(opponentTiles)
 }
 
 openingDeal()
@@ -311,7 +282,7 @@ function randomPatch() {
         opponentPatch.status = 'opponent active'
         console.log(`Opponent Patch: ${opponentPatch.name}`)
     } else {
-        randomPatch()
+        opponentPatch = randomPatch()
     }
     return opponentPatch
 }
@@ -325,7 +296,7 @@ function randomTile() {
         opponentTile.status = 'opponent active'
         console.log(`Opponent Tile: ${opponentTile.name}`)
     } else {
-        randomTile()
+        opponentTile = randomTile()
     }
     return opponentTile
 }
@@ -343,8 +314,6 @@ function setUserMove() {
     let scores = tally()
     console.log(`CURRENT SCORE: USER ${scores[0]}, OPPONENT ${scores[1]}`)
     subsequentDeal()
-    console.log(userTiles)
-    // console.log(opponentTiles)
     selectPatch()
     selectTile()
     console.log('NEW ROUND')
@@ -484,20 +453,21 @@ function checkOpponentPairs() {
         opponentPatch.status = 'opponent captured'
         opponentTopPatch.status = 'opponent captured'
         console.log('OPPONENT MATCHED WITH TOP')
-    } else if (opponentTile.color === opponentBottomTile.color || opponentTile.number === opponentBottomTile.number || opponentTile.shape === opponentBottomTile.shape) {
+    }
+    if (opponentTile.color === opponentBottomTile.color || opponentTile.number === opponentBottomTile.number || opponentTile.shape === opponentBottomTile.shape) {
         opponentPatch.status = 'opponent captured'
         opponentBottomPatch.status = 'opponent captured'
         console.log('OPPONENT MATCHED WITH BOTTOM')
-    } else if (opponentTile.color === opponentLeftTile.color || opponentTile.number === opponentLeftTile.number || opponentTile.shape === opponentLeftTile.shape) {
+    }
+    if (opponentTile.color === opponentLeftTile.color || opponentTile.number === opponentLeftTile.number || opponentTile.shape === opponentLeftTile.shape) {
         opponentPatch.status = 'opponent captured'
         opponentLeftPatch.status = 'opponent captured'
         console.log('OPPONENT MATCHED WITH LEFT')
-    } else if (opponentTile.color === opponentRightTile.color || opponentTile.number === opponentRightTile.number || opponentTile.shape === opponentRightTile.shape) {
+    }
+    if (opponentTile.color === opponentRightTile.color || opponentTile.number === opponentRightTile.number || opponentTile.shape === opponentRightTile.shape) {
         opponentPatch.status = 'opponent captured'
         opponentRightPatch.status = 'opponent captured'
         console.log('OPPONENT MATCHED WITH RIGHT')
-    } else {
-        console.log('NO MATCH FOR OPPONENT')
     }
 }
 
