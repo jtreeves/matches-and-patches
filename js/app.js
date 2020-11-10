@@ -18,14 +18,12 @@ reset.textContent = 'Reset'
 reset.classList.add('button')
 options.append(reset)
 
-const message = document.createElement('div')
-message.textContent = ''
-guide.append(message)
-
 // Create guide that will act as a user's console, providing feedback throughout the game
 
 function feedback(status) {
+    let message = document.createElement('div')
     message.textContent = status
+    guide.append(message)
 }
 
 // Create board's patches with class
