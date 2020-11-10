@@ -1,38 +1,3 @@
-// Create tile elements
-
-// const bottom = document.querySelector('.bottom')
-
-// let circleURL = ''
-
-// function createCircleImage() {
-//     const circleImage = document.createElement('canvas')
-//     circleImage.width = 100;
-//     circleImage.height = 100;
-//     bottom.append(circleImage)
-//     const ctx = circleImage.getContext('2d')
-//     ctx.fillStyle = 'green'
-//     ctx.beginPath()
-//     ctx.arc(50, 50, 25, 0, Math.PI * 2)
-//     ctx.fill()
-//     circleURL = circleImage.toDataURL('image/png')
-//     // .replace(/^data:image\/(png|jpg);base64,/, '')
-//     return circleURL
-// }
-
-// let circle = createCircleImage()
-
-// console.log(circle)
-
-
-
-// console.log(circleURL)
-
-// const test = document.createElement('div')
-// // bottom.append(test)
-// test.style.backgroundImage = `url('${circleURL}')`
-// test.innerText = 'hello'
-// console.log(test)
-
 // Grab parts of webpage with query selectors
 
 const smallBoard = document.querySelector('.small-board')
@@ -199,11 +164,36 @@ console.log(tiles)
 
 // console.log(tokens)
 
-const userToken = document.createElement('div')
-userToken.classList.add('token', 'user')
+class Token {
+    constructor() {
+        this.div = document.createElement('div');
+    }
+}
 
-const opponentToken = document.createElement('div')
-opponentToken.classList.add('token', 'opponent')
+function createTokens(player) {
+    let pieces = []
+    for (let i = 0; i < 64; i++) {
+        pieces.push(new Token(player))
+        pieces[i].name = player
+        pieces[i].div.classList.add('tile', 'token', player);
+    }
+    return pieces
+}
+
+const userTokens = createTokens('user')
+const opponentTokens = createTokens('opponent')
+
+console.log(userTokens)
+console.log(opponentTokens)
+
+options.append(userTokens[0].div)
+options.append(opponentTokens[0].div)
+
+// const userToken = document.createElement('div')
+// userToken.classList.add('token', 'user')
+
+// const opponentToken = document.createElement('div')
+// opponentToken.classList.add('token', 'opponent')
 
 // Choose one tile at random from the 'inactive' elements of the tiles object
 
@@ -510,15 +500,11 @@ function checkOpponentPairs() {
 function tokenUpgrade() {
     for (let i = 0; i < patches.length; i++) {
         if (patches[i].status === 'user captured') {
-            while (userPatch.div.firstChild) {
-                userPatch.div.removeChild(userPatch.div.firstChild)
-            }
-            userPatch.div.append(userToken)
+            patches[i].div.removeChild(patches[i].div.firstChild)
+            patches[i].div.append(userTokens[i].div)
         } else if (patches[i].status === 'opponent captured') {
-            while (opponentPatch.div.firstChild) {
-                opponentPatch.div.removeChild(opponentPatch.div.firstChild)
-            }
-            opponentPatch.div.append(opponentToken)
+            patches[i].div.removeChild(patches[i].div.firstChild)
+            patches[i].div.append(opponentTokens[i].div)
         }
     }
 }
