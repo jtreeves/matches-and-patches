@@ -18,6 +18,16 @@ reset.textContent = 'Reset'
 reset.classList.add('button')
 options.append(reset)
 
+const message = document.createElement('div')
+message.textContent = ''
+guide.append(message)
+
+// Create guide that will act as a user's console, providing feedback throughout the game
+
+function feedback(status) {
+    message.textContent = status
+}
+
 // Create board's patches with class
 
 class Patch {
@@ -243,7 +253,7 @@ function selectPatch() {
             smallPatches[i].div.addEventListener('click', function() {
                 userPatch = smallPatches[i]
                 userPatch.status = 'user active'
-                console.log(`User Patch: ${userPatch.name}`)
+                feedback(`User Patch: ${userPatch.name}`)
             })
         }
     }
@@ -260,7 +270,7 @@ function selectTile() {
             tiles[i].div.addEventListener('click', function() {
                 userTile = tiles[i]
                 userTile.status = 'user active'
-                console.log(`User Tile: ${userTile.name}`)
+                feedback(`User Tile: ${userTile.name}`)
             })
         }
     }
@@ -285,7 +295,7 @@ function randomPatch() {
     if (smallPatches[randomPatchIndex].status === 'inactive') {
         opponentPatch = smallPatches[randomPatchIndex]
         opponentPatch.status = 'opponent active'
-        console.log(`Opponent Patch: ${opponentPatch.name}`)
+        feedback(`Opponent Patch: ${opponentPatch.name}`)
     } else {
         opponentPatch = randomPatch()
     }
@@ -299,7 +309,7 @@ function randomTile() {
     if (tiles[randomTileIndex].status === 'opponent') {
         opponentTile = tiles[randomTileIndex]
         opponentTile.status = 'opponent active'
-        console.log(`Opponent Tile: ${opponentTile.name}`)
+        feedback(`Opponent Tile: ${opponentTile.name}`)
     } else {
         opponentTile = randomTile()
     }
@@ -317,11 +327,11 @@ function setUserMove() {
     userTile.status = 'board'
     opponentTile.status = 'board'
     let scores = tally()
-    console.log(`CURRENT SCORE: USER ${scores[0]}, OPPONENT ${scores[1]}`)
+    feedback(`CURRENT SCORE: USER ${scores[0]}, OPPONENT ${scores[1]}`)
     subsequentDeal()
     selectPatch()
     selectTile()
-    console.log('NEW ROUND')
+    feedback('NEW ROUND')
     tokenUpgrade()
     determineWinner()
 }
@@ -390,22 +400,22 @@ function checkUserPairs() {
     if (userTile.color === userTopTile.color || userTile.number === userTopTile.number || userTile.shape === userTopTile.shape) {
         userPatch.status = 'user captured'
         userTopPatch.status = 'user captured'
-        console.log('USER MATCHED WITH TOP')
+        feedback('USER MATCHED WITH TOP')
     }
     if (userTile.color === userBottomTile.color || userTile.number === userBottomTile.number || userTile.shape === userBottomTile.shape) {
         userPatch.status = 'user captured'
         userBottomPatch.status = 'user captured'
-        console.log('USER MATCHED WITH BOTTOM')
+        feedback('USER MATCHED WITH BOTTOM')
     }
     if (userTile.color === userLeftTile.color || userTile.number === userLeftTile.number || userTile.shape === userLeftTile.shape) {
         userPatch.status = 'user captured'
         userLeftPatch.status = 'user captured'
-        console.log('USER MATCHED WITH LEFT')
+        feedback('USER MATCHED WITH LEFT')
     }
     if (userTile.color === userRightTile.color || userTile.number === userRightTile.number || userTile.shape === userRightTile.shape) {
         userPatch.status = 'user captured'
         userRightPatch.status = 'user captured'
-        console.log('USER MATCHED WITH RIGHT')
+        feedback('USER MATCHED WITH RIGHT')
     }
 }
 
@@ -449,22 +459,22 @@ function checkOpponentPairs() {
     if (opponentTile.color === opponentTopTile.color || opponentTile.number === opponentTopTile.number || opponentTile.shape === opponentTopTile.shape) {
         opponentPatch.status = 'opponent captured'
         opponentTopPatch.status = 'opponent captured'
-        console.log('OPPONENT MATCHED WITH TOP')
+        feedback('OPPONENT MATCHED WITH TOP')
     }
     if (opponentTile.color === opponentBottomTile.color || opponentTile.number === opponentBottomTile.number || opponentTile.shape === opponentBottomTile.shape) {
         opponentPatch.status = 'opponent captured'
         opponentBottomPatch.status = 'opponent captured'
-        console.log('OPPONENT MATCHED WITH BOTTOM')
+        feedback('OPPONENT MATCHED WITH BOTTOM')
     }
     if (opponentTile.color === opponentLeftTile.color || opponentTile.number === opponentLeftTile.number || opponentTile.shape === opponentLeftTile.shape) {
         opponentPatch.status = 'opponent captured'
         opponentLeftPatch.status = 'opponent captured'
-        console.log('OPPONENT MATCHED WITH LEFT')
+        feedback('OPPONENT MATCHED WITH LEFT')
     }
     if (opponentTile.color === opponentRightTile.color || opponentTile.number === opponentRightTile.number || opponentTile.shape === opponentRightTile.shape) {
         opponentPatch.status = 'opponent captured'
         opponentRightPatch.status = 'opponent captured'
-        console.log('OPPONENT MATCHED WITH RIGHT')
+        feedback('OPPONENT MATCHED WITH RIGHT')
     }
 }
 
@@ -506,14 +516,14 @@ function determineWinner() {
         }
     }
     if (count < 2) {
-        console.log('GAME OVER!')
+        feedback('GAME OVER!')
         let scores = tally()
         if (scores[0] > scores[1]) {
-            console.log('You win!')
+            feedback('You win!')
         } else if (scores[1] > scores[0]) {
-            console.log('You lose!')
+            feedback('You lose!')
         } else {
-            console.log('A tie!')
+            feedback('A tie!')
         }
     }
 }

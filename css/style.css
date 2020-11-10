@@ -22,7 +22,11 @@ body {
 }
 
 .guide {
-    display: none;
+    display: grid;
+    grid-template-columns: 1;
+    grid-template-rows: 1;
+    margin-top: 100px;
+    border: 1px solid black;
 }
 
 .buttons {
