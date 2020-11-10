@@ -16,7 +16,9 @@ h1 {
     grid-column: 2 / 3;
     grid-row: 1 / 5;
     width: 350px;
+    background: white;
     border: 1px solid black;
+    border-radius: 10px;
 }
 
 .guide > * {
@@ -31,7 +33,9 @@ h1 {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
     gap: 20px;
-    border: 1px solid black;
+    background: black;
+    border: 20px solid black;
+    border-radius: 10px;
 }
 
 .patch {
@@ -40,12 +44,18 @@ h1 {
     align-items: center;
     height: 100px;
     width: 100px;
-    border: 1px solid black;
+    background: white;
 }
 
 .user-tiles {
     grid-column: 1 / 2;
     grid-row: 3 / 4;
+    align-self: center;
+    justify-self: center;
+    padding: 20px;
+    background: white;
+    border: 1px solid black;
+    border-radius: 10px;
 }
 
 .user-tiles > * {
@@ -61,4 +71,5 @@ h1 {
 .options > * {
     display: inline-block;
     margin: 0 50px;
+    background: white;
 }

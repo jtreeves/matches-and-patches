@@ -13,6 +13,11 @@ body {
     background: white;
 } */
 
+body {
+    font-family: sans-serif;
+    background: lightblue;
+}
+
 .intro {
     display: none;
 }
@@ -26,9 +31,10 @@ body {
 }
 
 .button {
-    display: inline;
+    /* display: inline; */
     padding: 20px;
     border: 1px solid black;
+    border-radius: 10px;
 }
 
 /* .tile {

@@ -22,12 +22,15 @@ const guideHeader = document.createElement('h3')
 guideHeader.textContent = 'Guide'
 guide.append(guideHeader)
 
+const guideBody = document.createElement('div')
+guide.append(guideBody)
+
 // Create guide that will act as a user's console, providing feedback throughout the game
 
 function feedback(status) {
-    let message = document.createElement('div')
+    let message = document.createElement('p')
     message.textContent = status
-    guide.append(message)
+    guideBody.prepend(message)
 }
 
 // Create board's patches with class
