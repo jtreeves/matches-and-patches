@@ -66,8 +66,6 @@ function createPatches() {
 
 let patches = createPatches()
 
-console.log(patches)
-
 // Display 16-patch board, with CSS and object's first 16 instances
 
 function createSmallPatches() {
