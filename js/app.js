@@ -1,10 +1,24 @@
 // Grab parts of webpage with query selectors
 
+const intro = document.querySelector('.intro')
 const smallBoard = document.querySelector('.small-board')
 const userTiles = document.querySelector('.user-tiles')
 const options = document.querySelector('.options')
+const guide = document.querySelector('.guide')
 
-// Create board's 64 patches with class
+// Create elements of webpage and append them to the webpage with above query selectors
+
+const submit = document.createElement('div')
+submit.textContent = 'Submit'
+submit.classList.add('button')
+options.append(submit)
+
+const reset = document.createElement('div')
+reset.textContent = 'Reset'
+reset.classList.add('button')
+options.append(reset)
+
+// Create board's patches with class
 
 class Patch {
     constructor(row, column) {
@@ -15,7 +29,7 @@ class Patch {
     }
 }
 
-// Store patches in an array as objects, with keys including the patch name and status of the patch, which could have values of:'inactive' (starting value), 'user active', 'opponent active', 'user captured', 'opponent captured', and <name of tile>
+// Store patches in an array as objects, with keys including the patch name and status of the patch, which could have values of: 'inactive' (starting value), 'user active', 'opponent active', 'user captured', 'opponent captured', and <name of tile>
 
 function createPatches() {
     let patches = []
@@ -66,7 +80,7 @@ function createPatches() {
 
 let patches = createPatches()
 
-// Display 16-patch board, with CSS and object's first 16 instances
+// Display 16-patch-version of board
 
 function createSmallPatches() {
     let smallPatches = []
@@ -219,13 +233,6 @@ function openingDeal() {
 
 openingDeal()
 
-// Display submit button
-
-const submit = document.createElement('div')
-submit.textContent = 'Submit'
-submit.classList.add('button')
-options.append(submit)
-
 // Select patch on board and tile from user's tiles
 
 let userPatch = ''
@@ -334,15 +341,7 @@ function subsequentDeal() {
     dealTileToOpponent()
 }
 
-// Check for errors that would result in an unacceptable move: First move must be on a certain patch, subsequent moves must be on touching patches, and moves must be on 'inactive' patches
-
-// Check for conflicts that would result in an uncompleted move: If user and AI choose same patch, then the patch goes to the player whose side includes that patch; player must still use selected tile, but choose a different patch
-
-// Change newly played patches on the board to have values of <name of tile> in the patches object
-
-// Change newly played tiles on the board to have values of 'user active' or 'opponent active', based on who played what, in the tiles object
-
-// Evaluate all possible match pairs for each player at the end of each round by looking at patches not marked with 'inactive' or 'locked' in patches object that are near patches occupied by <name of tile>, where that tile is marked as 'user active' or 'opponent active' in the tiles object
+// Evaluate all possible match pairs for each player at the end of each round
 
 function checkMatchPairs() {
     userPatch.status = userTile.name
@@ -469,9 +468,7 @@ function checkOpponentPairs() {
     }
 }
 
-// Check for conflicts that would result in match pair disputes: If each player is attempting to match with the same tile, tally the points going along with each match pair, and award the tile to the winner
-
-// Replace match pairs with player tokens on the patches; this changes display with the element from the array and the patch's value in the patches object to 'locked'
+// Replace match pairs with player tokens on the patches
 
 function tokenUpgrade() {
     for (let i = 0; i < patches.length; i++) {
@@ -484,10 +481,6 @@ function tokenUpgrade() {
         }
     }
 }
-
-// Change tile's value in tile object to 'board'
-
-// Deal new tile to each player at end of each round; involves changing the tile's value in the tile object
 
 // Create tally for each player that tallies their tokens on the board
 
@@ -503,11 +496,7 @@ function tally() {
     return scores
 }
 
-// Update tally after each round by incrementing by however many pieces were captured
-
-// Determine end of game: Less than two empty patches on the board
-
-// Evaluate winner: Whichever player has the highest tally
+// Determine end of game and winner
 
 function determineWinner() {
     let count = 0
@@ -529,6 +518,6 @@ function determineWinner() {
     }
 }
 
-// Display winner
+// Reset game by clicking the reset button, which will reload the page
 
-// Restart game by clearing board, and setting all patches' values to 'inactive' in patches object and all tiles' values as 'inactive' in tiles object
+reset.addEventListener('click', location.reload.bind(location))
