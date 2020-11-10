@@ -18,6 +18,10 @@ reset.textContent = 'Reset'
 reset.classList.add('button')
 options.append(reset)
 
+const guideHeader = document.createElement('h3')
+guideHeader.textContent = 'Guide'
+guide.append(guideHeader)
+
 // Create guide that will act as a user's console, providing feedback throughout the game
 
 function feedback(status) {
