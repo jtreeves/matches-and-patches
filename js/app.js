@@ -340,8 +340,8 @@ function setUserMove() {
     selectPatch()
     selectTile()
     feedback('NEW ROUND')
-    tokenUpgrade()
-    determineWinner()
+    setTimeout(tokenUpgrade, 1000)
+    setTimeout(determineWinner, 1000)
 }
 
 function setOpponentMove() {
