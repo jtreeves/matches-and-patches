@@ -60,8 +60,17 @@
 }
 
 .token {
-    background: purple;
     font-size: 25px;
+}
+
+.token.user {
+    background: violet;
+    color: black;
+}
+
+.token.opponent {
+    background: purple;
+    color: white;
 }
 
 .user::before {
