@@ -27,7 +27,7 @@ const slide3 = document.createElement('div')
 slide3.textContent = 'But what is a match? If two tiles share at least one feature (shape, number, or color), then they match. For instance, the Red Two Circle matches with the Red One Square because they share a color. It also matches with the Blue Two Triangle because they share a number. However, it does not match with the Blue Three Triangle because they do not share any common feature.'
 
 const slide4 = document.createElement('div')
-slide3.textContent = 'Still a little confused about the game? The best way to fix that is to play it! Plus, throughout the game, you can turn to this guide for feedback about what is happening in each round and what the current score is.'
+slide4.textContent = 'Still a little confused about the game? The best way to fix that is to play it! Plus, throughout the game, you can turn to this guide for feedback about what is happening in each round and what the current score is.'
 
 const moreInfo = document.createElement('div')
 moreInfo.textContent = 'More Info'
@@ -56,7 +56,7 @@ reset.classList.add('button')
 // Create guide that will act as a user's console, providing feedback throughout the game
 
 function feedback(status) {
-    let message = document.createElement('div')
+    let message = document.createElement('p')
     message.textContent = status
     guideBody.prepend(message)
     if (guideBody.childElementCount > 10) {
@@ -69,6 +69,23 @@ function feedback(status) {
 function aboutMatchesAndPatches() {
     guideBody.append(introduction)
     guideBody.append(moreInfo)
+    moreInfo.addEventListener('click', function() {
+        guideBody.removeChild(introduction)
+        guideBody.prepend(slide1)
+        moreInfo.addEventListener('click', function() {
+            guideBody.removeChild(slide1)
+            guideBody.prepend(slide2)
+            moreInfo.addEventListener('click', function() {
+                guideBody.removeChild(slide2)
+                guideBody.prepend(slide3)
+                moreInfo.addEventListener('click', function() {
+                    guideBody.removeChild(slide3)
+                    guideBody.removeChild(moreInfo)
+                    guideBody.prepend(slide4)
+                })
+            })
+        })
+    })
 }
 
 aboutMatchesAndPatches()
@@ -243,6 +260,9 @@ const opponentTokens = createTokens('opponent')
 play.addEventListener('click', beginGame)
 
 function beginGame() {
+    while (guideBody.firstChild) {
+        guideBody.removeChild(guideBody.firstChild);
+    }
     userTiles.removeChild(aboutUserTiles)
     options.removeChild(play)
     options.append(submit)
@@ -250,6 +270,7 @@ function beginGame() {
     openingDeal()
     selectPatch()
     selectTile()
+    feedback('To make your first move, click on one of your four tiles, then click on a patch on the board, then click the Submit button.')
 }
 
 // Choose one tile at random from the 'inactive' elements of the tiles object
