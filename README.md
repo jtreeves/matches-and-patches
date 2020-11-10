@@ -3,7 +3,7 @@
 The goal is to 'match' your tiles with existing tiles already on the board, and thus capture different 'patches' (aka, cells) on the board. In essence, it's Uno crossed with Dominoes, but played on a Checkers board.
 
 *How an opening hand could look at the beginning of a game:*
-![Initial Game](/images/intial-game.png)
+![Initial Game](/images/initial-game.png)
 
 *What an opening move could look like, using the above tiles:*
 ![First Move](/images/first-move.png)
