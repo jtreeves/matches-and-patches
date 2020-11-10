@@ -380,8 +380,8 @@ function checkMatchPairs() {
 function checkUserPairs() { 
     let userRow = userPatch.row
     let userColumn = userPatch.column
-    let userTopPatchRow = userRow + 1
-    let userBottomPatchRow = userRow - 1
+    let userTopPatchRow = userRow - 1
+    let userBottomPatchRow = userRow + 1
     let userLeftPatchColumn = userColumn - 1
     let userRightPatchColumn = userColumn + 1
     let userTopPatch = ''
@@ -438,8 +438,8 @@ function checkUserPairs() {
 function checkOpponentPairs() { 
     let opponentRow = opponentPatch.row
     let opponentColumn = opponentPatch.column
-    let opponentTopPatchRow = opponentRow + 1
-    let opponentBottomPatchRow = opponentRow - 1
+    let opponentTopPatchRow = opponentRow - 1
+    let opponentBottomPatchRow = opponentRow + 1
     let opponentLeftPatchColumn = opponentColumn - 1
     let opponentRightPatchColumn = opponentColumn + 1
     let opponentTopPatch = ''
