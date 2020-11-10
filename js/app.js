@@ -31,6 +31,9 @@ function feedback(status) {
     let message = document.createElement('p')
     message.textContent = status
     guideBody.prepend(message)
+    if (guideBody.childElementCount > 10) {
+        guideBody.removeChild(guideBody.lastChild)
+    }
 }
 
 // Create board's patches with class
