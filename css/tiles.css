@@ -1,10 +1,10 @@
 .tile {
-    /* display: inline-block; */
     width: 100px;
     height: 100px;
-    visibility: visible;
     font-size: 50px;
     color: white;
+    text-align: center;
+    line-height: 100px;
 }
 
 .red {
@@ -31,63 +31,43 @@
     border-bottom: 100px solid transparent;
 }
 
-.hexagon {
-    width: 0;
+.trapezoid {
+    border-bottom: 100px solid transparent;
+    border-left: 25px solid;
+    border-right: 25px solid;
     height: 0;
-    border-right: 60px solid;
-    border-top: 60px solid transparent;
-    border-left: 60px solid transparent;
-    border-bottom: 60px solid transparent;
-    border-top-left-radius: 60px;
-    border-top-right-radius: 60px;
-    border-bottom-left-radius: 60px;
-    border-bottom-right-radius: 60px;
-}
+    width: 50px;
+  }
 
 .circle {
     border-radius: 50%;
 }
 
-/* .circle {
-    background-image: url('images/circle.png') / cover;
-    position: relative;
-}
-
-.circle::before {
-    position: absolute;
-    background-color:  rgba(36, 70, 105, 0.74) ;
-} */
-
 .one::before {
     content: '1';
-    padding: 25%;
 }
 
 .two::before {
     content: '2';
-    padding: 25%;
 }
 
 .three::before {
     content: '3';
-    padding: 25%;
 }
 
 .four::before {
     content: '4';
-    padding: 25%;
 }
 
 .token {
     background: purple;
+    font-size: 25px;
 }
 
 .user::before {
     content: 'EAGLE';
-    padding: 25%;
 }
 
 .opponent::before {
     content: 'SNAKE';
-    padding: 25%;
 }

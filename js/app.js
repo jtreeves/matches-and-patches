@@ -166,7 +166,7 @@ function createTiles() {
         } else if ((i >= 4 && i<= 7) || (i >= 20 && i<= 23) || (i >= 36 && i<= 39) || (i >= 52 && i <= 55)) {
             tiles[i].shape = 'square'
         } else if ((i >= 8 && i<= 11) || (i >= 24 && i<= 27) || (i >= 40 && i<= 43) || (i >= 56 && i <= 59)) {
-            tiles[i].shape = 'hexagon'
+            tiles[i].shape = 'trapezoid'
         } else {
             tiles[i].shape = 'circle'
         }
