@@ -1,22 +1,11 @@
 // Grab parts of webpage with query selectors
 
-const intro = document.querySelector('.intro')
+const guide = document.querySelector('.guide')
 const smallBoard = document.querySelector('.small-board')
 const userTiles = document.querySelector('.user-tiles')
 const options = document.querySelector('.options')
-const guide = document.querySelector('.guide')
 
-// Create elements of webpage and append them to the webpage with above query selectors
-
-const submit = document.createElement('div')
-submit.textContent = 'Submit'
-submit.classList.add('button')
-options.append(submit)
-
-const reset = document.createElement('div')
-reset.textContent = 'Reset'
-reset.classList.add('button')
-options.append(reset)
+// Create elements of webpage and append some of them to the webpage with above query selectors
 
 const guideHeader = document.createElement('h3')
 guideHeader.textContent = 'Guide'
@@ -25,16 +14,64 @@ guide.append(guideHeader)
 const guideBody = document.createElement('div')
 guide.append(guideBody)
 
+const introduction = document.createElement('div')
+introduction.textContent = 'Welcome to Matches and Patches! This is a simple matching game. If you want to skip straight to the game, just click the Play button at the bottom left. If you want to learn more about the rules of the game, just click the More Info button below.'
+
+const slide1 = document.createElement('div')
+slide1.textContent = 'The game is played on a board with four rows and four columns. At the beginning of the game, you and your unseen opponent will be dealt four tiles. Each tile features a color, a number, and a shape. In each round, you and your opponent will play one tile on one of the patches on the board. If your tile matches an adjacent tile on the board, then you can capture the patch you played and the patch with the matching tile.'
+
+const slide2 = document.createElement('div')
+slide2.textContent = 'After playing your tiles, you and your opponent will each be dealt an additional tile. For every patch on the board that you capture, you get a point. The game ends when all the patches on the board are covered (or when there are not enough left for another round), and the winner is the player with the most points.'
+
+const slide3 = document.createElement('div')
+slide3.textContent = 'But what is a match? If two tiles share at least one feature (shape, number, or color), then they match. For instance, the Red Two Circle matches with the Red One Square because they share a color. It also matches with the Blue Two Triangle because they share a number. However, it does not match with the Blue Three Triangle because they do not share any common feature.'
+
+const slide4 = document.createElement('div')
+slide3.textContent = 'Still a little confused about the game? The best way to fix that is to play it! Plus, throughout the game, you can turn to this guide for feedback about what is happening in each round and what the current score is.'
+
+const moreInfo = document.createElement('div')
+moreInfo.textContent = 'More Info'
+moreInfo.classList.add('button')
+
+const aboutUserTiles = document.createElement('div')
+aboutUserTiles.textContent = 'Your tiles will appear here'
+aboutUserTiles.style.color = 'gray'
+aboutUserTiles.style.fontSize = '30px'
+aboutUserTiles.style.fontStyle = 'italic'
+userTiles.append(aboutUserTiles)
+
+const play = document.createElement('div')
+play.textContent = 'Play'
+play.classList.add('button')
+options.append(play)
+
+const submit = document.createElement('div')
+submit.textContent = 'Submit'
+submit.classList.add('button')
+
+const reset = document.createElement('div')
+reset.textContent = 'Reset'
+reset.classList.add('button')
+
 // Create guide that will act as a user's console, providing feedback throughout the game
 
 function feedback(status) {
-    let message = document.createElement('p')
+    let message = document.createElement('div')
     message.textContent = status
     guideBody.prepend(message)
     if (guideBody.childElementCount > 10) {
         guideBody.removeChild(guideBody.lastChild)
     }
 }
+
+// Introductory slides that explain the game to the user
+
+function aboutMatchesAndPatches() {
+    guideBody.append(introduction)
+    guideBody.append(moreInfo)
+}
+
+aboutMatchesAndPatches()
 
 // Create board's patches with class
 
@@ -201,6 +238,20 @@ function createTokens(player) {
 const userTokens = createTokens('user')
 const opponentTokens = createTokens('opponent')
 
+// Launch game elements when click 'play' button
+
+play.addEventListener('click', beginGame)
+
+function beginGame() {
+    userTiles.removeChild(aboutUserTiles)
+    options.removeChild(play)
+    options.append(submit)
+    options.append(reset)
+    openingDeal()
+    selectPatch()
+    selectTile()
+}
+
 // Choose one tile at random from the 'inactive' elements of the tiles object
 
 let randomTileIndex = ''
@@ -249,8 +300,6 @@ function openingDeal() {
     dealTileToOpponent()
 }
 
-openingDeal()
-
 // Select patch on board and tile from user's tiles
 
 let userPatch = ''
@@ -268,8 +317,6 @@ function selectPatch() {
     return userPatch
 }
 
-selectPatch()
-
 let userTile = ''
 
 function selectTile() {
@@ -284,8 +331,6 @@ function selectTile() {
     }
     return userTile
 }
-
-selectTile()
 
 // AI performs similar functions: Choose patch at random and tile at random
 
